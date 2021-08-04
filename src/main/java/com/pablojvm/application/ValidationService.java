@@ -2,6 +2,8 @@ package com.pablojvm.application;
 
 import com.pablojvm.domain.DataPostUser;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,12 +20,20 @@ public class ValidationService
     {
         ArrayList<String> list = new ArrayList<>();
 
-        if (data.getName().length() < 4)
-        {
-            list.add("The name: " + data.getName() + " is not valid, should be length " +
-                    "greater than 4");
-        }
+        String resultName = validateName(data);
+        if (resultName != null)
+            list.add(resultName);
 
         return list;
+    }
+
+    private String validateName(@NotNull DataPostUser data)
+    {
+        if (data.getName().length() < 4)
+        {
+            return "The name: " + data.getName() + " is not valid, should be length " +
+                    "greater than 4";
+        }
+        return null;
     }
 }
