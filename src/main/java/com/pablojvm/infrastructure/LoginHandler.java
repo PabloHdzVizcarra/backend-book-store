@@ -7,50 +7,40 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 public class LoginHandler implements HttpHandler
 {
-    public LoginHandler()
+
+    private final UtilsHttpHandlers utilsHttpHandlers;
+
+    public LoginHandler(UtilsHttpHandlers utilsHttpHandlers)
     {
+        this.utilsHttpHandlers = utilsHttpHandlers;
     }
 
     // TODO: 8/4/21 validate request body
     // TODO: 8/4/21 -- return message error when body is not valid
     @Override
-    public void handle(HttpExchange exchange) throws IOException
+    public void handle(HttpExchange exchange)
     {
         ObjectMapper objectMapper = new ObjectMapper();
-        String requestBody = getRequestBody(exchange);
-        DataPostUser dataPostUser = objectMapper.readValue(
-                requestBody,
-                new TypeReference<>()
-                {
-                }
-        );
-
-        System.out.println(dataPostUser);
-
-    }
-
-    /**
-     * Convert the body request from JSON format to string format.
-     *
-     * @param exchange A {@link HttpExchange} with the HTTP method data.
-     * @return The body of the request in string format.
-     * @throws IOException if there is an error reading the body
-     */
-    private String getRequestBody(HttpExchange exchange) throws IOException
-    {
-        InputStream requestBody = exchange.getRequestBody();
-        StringBuilder stringBuilder = new StringBuilder();
-
-        int i;
-        while ((i = requestBody.read()) != -1)
+        String requestBody;
+        try
         {
-            stringBuilder.append((char) i);
-        }
+            requestBody = utilsHttpHandlers.getRequestBody(exchange);
+            DataPostUser dataPostUser = objectMapper.readValue(
+                    requestBody,
+                    new TypeReference<>()
+                    {
+                    }
+            );
+            System.out.println(dataPostUser);
 
-        return stringBuilder.toString();
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
     }
 }
