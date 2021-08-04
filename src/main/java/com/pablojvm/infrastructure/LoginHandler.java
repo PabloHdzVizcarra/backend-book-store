@@ -13,9 +13,9 @@ public class LoginHandler implements HttpHandler
 
     private final UtilsHttpHandlers utilsHttpHandlers;
 
-    public LoginHandler(UtilsHttpHandlers utilsHttpHandlers)
+    public LoginHandler()
     {
-        this.utilsHttpHandlers = utilsHttpHandlers;
+        this.utilsHttpHandlers = new UtilsHttpHandlers();
     }
 
     // TODO: 8/4/21 validate request body
@@ -35,7 +35,6 @@ public class LoginHandler implements HttpHandler
                     }
             );
             System.out.println(dataPostUser);
-
 
         } catch (IOException e)
         {
