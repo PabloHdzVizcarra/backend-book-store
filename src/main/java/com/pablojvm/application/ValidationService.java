@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class ValidationService
 {
@@ -28,7 +29,21 @@ public class ValidationService
         if (resultLastname != null)
             list.add(resultLastname);
 
+        String resultEmail = this.validateEmail(data);
+        if (resultEmail != null)
+            list.add(resultEmail);
+
         return list;
+    }
+
+    private String validateEmail(DataPostUser data)
+    {
+        String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+        if (!Pattern.compile(regex).matcher(data.getEmail()).matches())
+        {
+            return "The email: " + data.getEmail() + " is not valid";
+        }
+        return null;
     }
 
     private String validateLastname(@NotNull DataPostUser data)
