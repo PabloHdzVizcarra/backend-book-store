@@ -1,7 +1,7 @@
 package com.pablojvm;
 
+import com.pablojvm.application.ValidationService;
 import com.pablojvm.infrastructure.LoginHandler;
-import com.pablojvm.infrastructure.UtilsHttpHandlers;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class Main
         ThreadPoolExecutor threadPoolExecutor =
                 (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
 
-        server.createContext("/login", new LoginHandler(new UtilsHttpHandlers()));
+        server.createContext("/login", new LoginHandler(new ValidationService()));
         server.setExecutor(threadPoolExecutor);
         server.start();
         System.out.println("server on in port 8081");

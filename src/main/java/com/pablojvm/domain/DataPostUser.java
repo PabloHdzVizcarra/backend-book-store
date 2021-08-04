@@ -1,5 +1,6 @@
 package com.pablojvm.domain;
 
+
 public class DataPostUser
 {
     private String name;
@@ -9,6 +10,14 @@ public class DataPostUser
 
     public DataPostUser()
     {
+    }
+
+    public DataPostUser(String name, String lastname, String email, String password)
+    {
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
     }
 
     public String getName()
