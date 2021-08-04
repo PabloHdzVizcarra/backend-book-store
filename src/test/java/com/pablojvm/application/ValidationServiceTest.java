@@ -14,7 +14,7 @@ class ValidationServiceTest
 {
 
     @Nested
-    class validateFieldsWithError
+    class validateFieldsWithErrors
     {
         private final String name = "john";
         private final String errorName = "asd";
@@ -58,6 +58,15 @@ class ValidationServiceTest
         void validateEmailWithError()
         {
             DataPostUser data = new DataPostUser(name, lastname, errorEmail, password);
+            List<String> list = service.validateDataCreateUser(data);
+
+            assertEquals(list.size(), 1);
+        }
+
+        @Test
+        void validatePasswordWithError()
+        {
+            DataPostUser data = new DataPostUser(name, lastname, email, errorPassword);
             List<String> list = service.validateDataCreateUser(data);
 
             assertEquals(list.size(), 1);

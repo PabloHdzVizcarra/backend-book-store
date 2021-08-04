@@ -15,8 +15,8 @@ public class ValidationService
     {
     }
 
-    // TODO: 8/4/21 validate email
     // TODO: 8/4/21 validate password
+    // TODO: 8/4/21 return array with errors or empty array
     public List<String> validateDataCreateUser(DataPostUser data)
     {
         ArrayList<String> list = new ArrayList<>();
