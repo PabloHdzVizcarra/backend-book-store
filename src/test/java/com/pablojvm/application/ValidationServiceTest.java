@@ -71,5 +71,16 @@ class ValidationServiceTest
 
             assertEquals(list.size(), 1);
         }
+
+        @Test
+        void allFieldsNotValid()
+        {
+            DataPostUser data =
+                    new DataPostUser(errorName, errorLastname, errorEmail, errorPassword);
+            List<String> list = service.validateDataCreateUser(data);
+
+            assertEquals(list.size(), 4);
+
+        }
     }
 }
