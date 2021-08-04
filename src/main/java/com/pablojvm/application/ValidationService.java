@@ -14,8 +14,8 @@ public class ValidationService
     {
     }
 
-    // TODO: 8/4/21 validate field name
-    // TODO: 8/4/21 validate field lastname
+    // TODO: 8/4/21 validate email
+    // TODO: 8/4/21 validate password
     public List<String> validateDataCreateUser(DataPostUser data)
     {
         ArrayList<String> list = new ArrayList<>();
@@ -31,7 +31,7 @@ public class ValidationService
         return list;
     }
 
-    private String validateLastname(DataPostUser data)
+    private String validateLastname(@NotNull DataPostUser data)
     {
         if (data.getLastname().length() < 4)
         {
