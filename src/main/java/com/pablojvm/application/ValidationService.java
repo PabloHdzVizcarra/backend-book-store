@@ -20,11 +20,26 @@ public class ValidationService
     {
         ArrayList<String> list = new ArrayList<>();
 
-        String resultName = validateName(data);
+        String resultName = this.validateName(data);
         if (resultName != null)
             list.add(resultName);
 
+        String resultLastname = this.validateLastname(data);
+        if (resultLastname != null)
+            list.add(resultLastname);
+
         return list;
+    }
+
+    private String validateLastname(DataPostUser data)
+    {
+        if (data.getLastname().length() < 4)
+        {
+            return "The lastname: " + data.getLastname() + " is not valid, " +
+                    "should be length greater than 4";
+        }
+
+        return null;
     }
 
     private String validateName(@NotNull DataPostUser data)

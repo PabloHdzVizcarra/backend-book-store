@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ValidationServiceTest
 {
     @Test
-    void validateName()
+    void validateNameWithError()
     {
         ValidationService service = new ValidationService();
         String errorName = "do";
@@ -19,6 +19,22 @@ class ValidationServiceTest
         String email = "test@tes.com";
         String password = "admin123";
         DataPostUser data = new DataPostUser(errorName, lastname, email, password);
+
+
+        List<String> listErrors = service.validateDataCreateUser(data);
+
+        assertEquals(listErrors.size(), 1);
+    }
+
+    @Test
+    void validateLastnameWithError()
+    {
+        ValidationService service = new ValidationService();
+        String name = "john";
+        String lastname = "co";
+        String email = "test@tes.com";
+        String password = "admin123";
+        DataPostUser data = new DataPostUser(name, lastname, email, password);
 
 
         List<String> listErrors = service.validateDataCreateUser(data);
