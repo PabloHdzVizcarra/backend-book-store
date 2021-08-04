@@ -33,10 +33,23 @@ public class ValidationService
         if (resultEmail != null)
             list.add(resultEmail);
 
+        String resultPassword = this.validatePassword(data);
+        if (resultPassword != null)
+            list.add(resultPassword);
+
         return list;
     }
 
-    private String validateEmail(DataPostUser data)
+    private String validatePassword(@NotNull DataPostUser data)
+    {
+        if (data.getPassword().length() < 8)
+            return "The password: " + data.getPassword() + " is not valid, " +
+                    "should be length greater than 8";
+
+        return null;
+    }
+
+    private String validateEmail(@NotNull DataPostUser data)
     {
         String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
         if (!Pattern.compile(regex).matcher(data.getEmail()).matches())
