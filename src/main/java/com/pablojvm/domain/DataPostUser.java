@@ -1,6 +1,10 @@
 package com.pablojvm.domain;
 
 
+/**
+ * Represents the data sent by user with which he/she expects to create a new user in
+ * the application.
+ */
 public class DataPostUser
 {
     private String name;
