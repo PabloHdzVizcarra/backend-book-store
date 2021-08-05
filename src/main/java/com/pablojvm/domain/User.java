@@ -1,5 +1,6 @@
 package com.pablojvm.domain;
 
+// TODO: 8/5/21 hash password correctly
 public class User
 {
     private final String name;
@@ -14,6 +15,11 @@ public class User
         this.lastname = lastname;
         this.email = email;
         this.password = Password.create(password);
+    }
+
+    public String getPassword()
+    {
+        return password;
     }
 
     @Override

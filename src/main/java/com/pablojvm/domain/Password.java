@@ -8,6 +8,6 @@ public class Password
     public static String create(String password)
     {
         SecureRandom random = new SecureRandom();
-        return null;
+        return password;
     }
 }
