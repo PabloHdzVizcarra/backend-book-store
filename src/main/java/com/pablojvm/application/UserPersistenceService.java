@@ -2,13 +2,12 @@ package com.pablojvm.application;
 
 import com.pablojvm.domain.DataPostUser;
 import com.pablojvm.domain.User;
-import com.pablojvm.infrastructure.MysqlDB;
 
 public class UserPersistenceService
 {
-    private final MysqlDB mysqlDB;
+    private final CrudOperationsDB mysqlDB;
 
-    public UserPersistenceService(MysqlDB mysqlDB)
+    public UserPersistenceService(CrudOperationsDB mysqlDB)
     {
         this.mysqlDB = mysqlDB;
     }
@@ -21,5 +20,7 @@ public class UserPersistenceService
                 data.getEmail(),
                 data.getPassword()
         );
+
+        this.mysqlDB.saveUser(userToSave);
     }
 }

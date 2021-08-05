@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class MysqlDB implements CrudOperationsDB
@@ -25,22 +26,23 @@ public class MysqlDB implements CrudOperationsDB
                 "jdbc:mysql://localhost:3306/books",
                 "root",
                 "my-secret-pw"
-        ); PreparedStatement userStatement = connection.prepareStatement(query))
+        ); PreparedStatement userStatement = connection.prepareStatement(query,
+                Statement.RETURN_GENERATED_KEYS))
         {
             userStatement.setString(1, user.getName());
             userStatement.setString(2, user.getLastname());
             userStatement.setString(3, user.getEmail());
             userStatement.setString(4, user.getPassword());
 
-
-            try (ResultSet resultSet = userStatement.executeQuery())
+            userStatement.executeUpdate();
+            try (ResultSet resultSet = userStatement.getGeneratedKeys())
             {
                 while (resultSet.next())
                 {
-                    String userName = resultSet.getString("user_name");
-                    System.out.println(userName);
+                    System.out.println(resultSet.getInt(1));
                 }
             }
+
 
         } catch (SQLException throwables)
         {

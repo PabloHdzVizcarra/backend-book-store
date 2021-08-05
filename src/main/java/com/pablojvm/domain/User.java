@@ -5,11 +5,11 @@ import java.util.UUID;
 // TODO: 8/5/21 hash password correctly
 public class User
 {
-    private final UUID uuid;
     private final String name;
     private final String lastname;
     private final String email;
     private final String password;
+    private Integer id;
 
 
     public User(String name, String lastname, String email, String password)
@@ -18,12 +18,6 @@ public class User
         this.lastname = lastname;
         this.email = email;
         this.password = Password.create(password);
-        this.uuid = UUID.randomUUID();
-    }
-
-    public UUID getUuid()
-    {
-        return uuid;
     }
 
     public String getName()
@@ -46,15 +40,20 @@ public class User
         return password;
     }
 
+    public void setId(Integer id)
+    {
+        this.id = id;
+    }
+
     @Override
     public String toString()
     {
         return "User{" +
-                "uuid=" + uuid +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", id=" + id +
                 '}';
     }
 }
