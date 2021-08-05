@@ -15,5 +15,6 @@ public class Main
 
         Javalin app = Javalin.create().start(8081);
         app.post("/login", usersController::createUser);
+
     }
 }
