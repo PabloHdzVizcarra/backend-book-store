@@ -21,6 +21,26 @@ public class User
         this.uuid = UUID.randomUUID();
     }
 
+    public UUID getUuid()
+    {
+        return uuid;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getLastname()
+    {
+        return lastname;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
     public String getPassword()
     {
         return password;
