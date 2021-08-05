@@ -16,6 +16,7 @@ class UserTest
 
         User user = new User(name, lastname, email, password);
 
+        System.out.println(user);
         assertNotEquals(password, user.getPassword());
     }
 }
