@@ -3,6 +3,7 @@ package com.pablojvm.infrastructure;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pablojvm.application.UserPersistenceService;
 import com.pablojvm.application.ValidationService;
 import com.pablojvm.domain.DataPostUser;
 
@@ -14,10 +15,15 @@ import io.javalin.http.Context;
 public class UsersController
 {
     private final ValidationService validationService;
+    private final UserPersistenceService userPersistenceService;
 
-    public UsersController(ValidationService service)
+    public UsersController(
+            ValidationService service,
+            UserPersistenceService userPersistenceService
+    )
     {
         this.validationService = service;
+        this.userPersistenceService = userPersistenceService;
     }
 
     public void createUser(Context context) throws JsonProcessingException

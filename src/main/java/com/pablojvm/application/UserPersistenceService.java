@@ -1,14 +1,16 @@
 package com.pablojvm.application;
 
+import com.pablojvm.domain.DataPostUser;
+
 public class UserPersistenceService
 {
-    // TODO: 8/5/21 create database service
-    // TODO: 8/5/21 create POJO User
     public UserPersistenceService()
     {
     }
 
-    public void saveUser()
+    // TODO: 8/5/21 create POJO User
+    // TODO: 8/5/21 hash password
+    public void saveUser(DataPostUser data)
     {
 
     }

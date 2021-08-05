@@ -1,5 +1,6 @@
 package com.pablojvm;
 
+import com.pablojvm.application.UserPersistenceService;
 import com.pablojvm.application.ValidationService;
 import com.pablojvm.infrastructure.UsersController;
 
@@ -11,7 +12,8 @@ public class Main
 {
     public static void main(String[] args)
     {
-        UsersController usersController = new UsersController(new ValidationService());
+        UsersController usersController = new UsersController(
+                new ValidationService(), new UserPersistenceService());
 
         Javalin app = Javalin.create().start(8081);
         app.post("/login", usersController::createUser);
