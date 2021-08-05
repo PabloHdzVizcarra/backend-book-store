@@ -23,7 +23,8 @@ public class UsersController
     public void createUser(Context context) throws JsonProcessingException
     {
 
-        // TODO: 8/5/21 save user in database
+        // TODO: 8/5/21 add service to save user in database
+        // TODO: 8/5/21 add service logging messages
         String body = context.body();
         ObjectMapper objectMapper = new ObjectMapper();
         DataPostUser data =
@@ -33,8 +34,6 @@ public class UsersController
 
         List<String> errorsList =
                 this.validationService.validateDataCreateUser(data);
-
-        System.out.println(errorsList);
 
         if (errorsList.size() != 0)
         {
