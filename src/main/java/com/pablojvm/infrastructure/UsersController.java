@@ -4,18 +4,23 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pablojvm.application.ActionsPersistenceService;
+import com.pablojvm.application.UserPersistenceService;
 import com.pablojvm.application.ValidationService;
 import com.pablojvm.domain.DataPostUser;
 import com.pablojvm.domain.User;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import io.javalin.http.Context;
 
 public class UsersController {
     private final ValidationService validationService;
     private final ActionsPersistenceService userPersistenceService;
+    private static final Logger LOGGER =
+            Logger.getLogger(UserPersistenceService.class.getName());
 
     public UsersController(
             ValidationService service,
@@ -39,6 +44,12 @@ public class UsersController {
 
         if (errorsList.size() != 0) {
             this.responseCreateUserWithError(context, errorsList);
+
+            LOGGER.log(
+                    Level.INFO,
+                    "an attempt was made to create a user with the following" +
+                            "invalid data: " + errorsList
+            );
         } else if (saveUser == null) {
             this.responseWithInvalidEmail(context);
         } else {
