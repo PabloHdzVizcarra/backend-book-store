@@ -1,5 +1,6 @@
 package com.pablojvm.infrastructure;
 
+import com.pablojvm.application.UserPersistenceService;
 import com.pablojvm.application.operationsDatabase;
 import com.pablojvm.domain.User;
 
@@ -9,9 +10,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class MysqlDB implements operationsDatabase {
+    private static final Logger LOGGER =
+            Logger.getLogger(MysqlDB.class.getName());
 
     @Override
     public int saveUser(User user) {
@@ -44,7 +49,11 @@ public class MysqlDB implements operationsDatabase {
             return idUserCreated;
 
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            LOGGER.log(
+                    Level.WARNING,
+                    "The following error occurred in the database: " +
+                            throwables.getMessage()
+            );
         }
         return 0;
     }

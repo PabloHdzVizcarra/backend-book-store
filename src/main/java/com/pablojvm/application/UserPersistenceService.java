@@ -25,7 +25,6 @@ public class UserPersistenceService implements ActionsPersistenceService
         int idUser = this.mysql.saveUser(userToSave);
         if (idUser == 0)
         {
-            System.out.println("try save user with email duplicated");
             return null;
         }
 

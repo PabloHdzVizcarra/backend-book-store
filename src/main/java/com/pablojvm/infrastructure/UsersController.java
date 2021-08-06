@@ -48,11 +48,19 @@ public class UsersController {
             LOGGER.log(
                     Level.INFO,
                     "an attempt was made to create a user with the following" +
-                            "invalid data: " + errorsList
+                            "invalid data: " + errorsList.remove(0)
             );
         } else if (saveUser == null) {
+            LOGGER.log(
+                    Level.INFO,
+                    "failed to save the user in the database"
+            );
             this.responseWithInvalidEmail(context);
         } else {
+            LOGGER.log(
+                    Level.INFO,
+                    "the following user was successfully saved in the database" + saveUser
+            );
             context.status(201);
             context.json(saveUser);
         }
