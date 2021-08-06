@@ -5,6 +5,7 @@ import com.pablojvm.domain.DataPostUser;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -35,7 +36,7 @@ public class ValidationService
         if (resultPassword != null)
             list.add(resultPassword);
 
-        return list;
+        return Collections.unmodifiableList(list);
     }
 
     private String validatePassword(@NotNull DataPostUser data)

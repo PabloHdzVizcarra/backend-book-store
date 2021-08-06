@@ -40,6 +40,7 @@ public class UsersController {
 
         List<String> errorsList =
                 this.validationService.validateDataCreateUser(data);
+
         User saveUser = this.userPersistenceService.saveUser(data);
 
         if (errorsList.size() != 0) {
@@ -48,7 +49,7 @@ public class UsersController {
             LOGGER.log(
                     Level.INFO,
                     "an attempt was made to create a user with the following" +
-                            "invalid data: " + errorsList.remove(0)
+                            "invalid data: " + errorsList
             );
         } else if (saveUser == null) {
             LOGGER.log(
