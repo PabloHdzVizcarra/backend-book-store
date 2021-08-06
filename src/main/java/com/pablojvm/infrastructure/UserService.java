@@ -16,13 +16,13 @@ import java.util.logging.Logger;
 
 import io.javalin.http.Context;
 
-public class UsersController {
+public class UserService {
     private final ValidationService validationService;
     private final ActionsPersistenceService userPersistenceService;
     private static final Logger LOGGER =
             Logger.getLogger(UserPersistenceService.class.getName());
 
-    public UsersController(
+    public UserService(
             ValidationService service,
             ActionsPersistenceService userPersistenceService
     ) {
@@ -76,8 +76,6 @@ public class UsersController {
             Context context,
             List<String> errorsList
     ) {
-        errorsList.add("You have some values with invalidad data, please check this " +
-                "values");
         Collections.reverse(errorsList);
         context.status(400);
         context.json(errorsList);

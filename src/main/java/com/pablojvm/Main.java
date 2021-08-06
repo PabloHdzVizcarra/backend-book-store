@@ -3,7 +3,8 @@ package com.pablojvm;
 import com.pablojvm.application.UserPersistenceService;
 import com.pablojvm.application.ValidationService;
 import com.pablojvm.infrastructure.MysqlDB;
-import com.pablojvm.infrastructure.UsersController;
+import com.pablojvm.infrastructure.UserService;
+import com.pablojvm.user.UserController;
 import com.pablojvm.util.LoggingUtil;
 
 import java.io.IOException;
@@ -14,12 +15,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
         LoggingUtil.initLogManager();
 
-        UsersController usersController = new UsersController(
-                new ValidationService(),
-                new UserPersistenceService(new MysqlDB())
-        );
+        UserController userController = new UserController(
+                new UserService(
+                        new ValidationService(),
+                        new UserPersistenceService(
+                                new MysqlDB())
+                ));
 
         Javalin app = Javalin.create().start(8082);
-        app.post("/login", usersController::createUser);
+        app.post("/login", userController::createUser);
     }
 }
