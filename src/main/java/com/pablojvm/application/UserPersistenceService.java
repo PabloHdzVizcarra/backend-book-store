@@ -5,17 +5,14 @@ import com.pablojvm.domain.User;
 
 public class UserPersistenceService
 {
-    private final operationsDatabase mysqlDB;
+    private final operationsDatabase mysql;
 
-    public UserPersistenceService(operationsDatabase mysqlDB)
+    public UserPersistenceService(operationsDatabase mysql)
     {
-        this.mysqlDB = mysqlDB;
+        this.mysql = mysql;
     }
 
-    // TODO: 8/5/21 get the primary key generate method saveUser
-    // TODO: 8/5/21 set the primary key in User object
-    // TODO: 8/5/21 return User object with all data
-    public User saveUser(DataPostUser data)
+    public User saveUser(DataPostUser data) throws IllegalArgumentException
     {
         User userToSave = new User(
                 data.getName(),
@@ -24,11 +21,11 @@ public class UserPersistenceService
                 data.getPassword()
         );
 
-        int idUser = this.mysqlDB.saveUser(userToSave);
+        int idUser = this.mysql.saveUser(userToSave);
         if (idUser == 0)
         {
-            throw new IllegalArgumentException("The email: " + userToSave.getEmail() +
-                    " already use");
+            System.out.println("try save user with email duplicated");
+            return null;
         }
 
         userToSave.setId(idUser);

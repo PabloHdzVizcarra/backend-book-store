@@ -18,7 +18,10 @@ class UserPersistenceServiceTest
                 new UserPersistenceService(mysqlDB);
 
         DataPostUser data = new DataPostUser(
-                "john", "connor", "data@example.com", "admin123");
+                "john",
+                "connor",
+                "data@example.com",
+                "admin123");
 
         assertThrows(IllegalArgumentException.class, () ->
         {

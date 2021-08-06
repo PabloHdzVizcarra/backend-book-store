@@ -13,52 +13,51 @@ import java.util.List;
 
 import io.javalin.http.Context;
 
-public class UsersController
-{
+public class UsersController {
     private final ValidationService validationService;
     private final UserPersistenceService userPersistenceService;
 
     public UsersController(
             ValidationService service,
             UserPersistenceService userPersistenceService
-    )
-    {
+    ) {
         this.validationService = service;
         this.userPersistenceService = userPersistenceService;
     }
 
-    public void createUser(Context context) throws JsonProcessingException
-    {
+    public void createUser(Context context) throws JsonProcessingException {
 
         // TODO: 8/5/21 add service logging messages
         String body = context.body();
         ObjectMapper objectMapper = new ObjectMapper();
         DataPostUser data =
-                objectMapper.readValue(body, new TypeReference<>()
-                {
+                objectMapper.readValue(body, new TypeReference<>() {
                 });
 
         List<String> errorsList =
                 this.validationService.validateDataCreateUser(data);
+        User saveUser = this.userPersistenceService.saveUser(data);
 
-        if (errorsList.size() != 0)
-        {
+        if (errorsList.size() != 0) {
             this.responseCreateUserWithError(context, errorsList);
-
-        } else
-        {
-            User saveUser = this.userPersistenceService.saveUser(data);
-
+        } else if (saveUser == null) {
+            this.responseWithInvalidEmail(context);
+        } else {
             context.status(201);
             context.json(saveUser);
         }
+
+    }
+
+    private void responseWithInvalidEmail(Context context) {
+        context.status(400);
+        context.result("The email is duplicated, please add another email.");
     }
 
     private void responseCreateUserWithError(
             Context context,
             List<String> errorsList
-    )
-    {
+    ) {
         errorsList.add("You have some values with invalidad data, please check this " +
                 "values");
         Collections.reverse(errorsList);
