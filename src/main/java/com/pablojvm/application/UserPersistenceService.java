@@ -3,8 +3,7 @@ package com.pablojvm.application;
 import com.pablojvm.domain.DataPostUser;
 import com.pablojvm.domain.User;
 
-// TODO: 8/6/21 create service user interface
-public class UserPersistenceService
+public class UserPersistenceService implements ActionsPersistenceService
 {
     private final operationsDatabase mysql;
 
