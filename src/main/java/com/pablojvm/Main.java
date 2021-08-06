@@ -7,7 +7,6 @@ import com.pablojvm.infrastructure.UsersController;
 
 import io.javalin.Javalin;
 
-// TODO: 8/4/21 create endpoint post user
 // TODO: 8/5/21 endpoint to log user
 public class Main
 {

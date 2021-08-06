@@ -12,6 +12,7 @@ public class UserPersistenceService implements ActionsPersistenceService
         this.mysql = mysql;
     }
 
+    @Override
     public User saveUser(DataPostUser data) throws IllegalArgumentException
     {
         User userToSave = new User(
