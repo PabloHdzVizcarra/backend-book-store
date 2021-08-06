@@ -1,8 +1,6 @@
 package com.pablojvm.domain;
 
-import java.util.UUID;
 
-// TODO: 8/5/21 hash password correctly
 public class User
 {
     private final String name;
@@ -14,8 +12,8 @@ public class User
 
     public User(String name, String lastname, String email, String password)
     {
-        this.name = name;
-        this.lastname = lastname;
+        this.name = name.toLowerCase();
+        this.lastname = lastname.toLowerCase();
         this.email = email;
         this.password = Password.create(password);
     }
