@@ -5,14 +5,17 @@ import com.pablojvm.domain.User;
 
 public class UserPersistenceService
 {
-    private final CrudOperationsDB mysqlDB;
+    private final operationsDatabase mysqlDB;
 
-    public UserPersistenceService(CrudOperationsDB mysqlDB)
+    public UserPersistenceService(operationsDatabase mysqlDB)
     {
         this.mysqlDB = mysqlDB;
     }
 
-    public void saveUser(DataPostUser data)
+    // TODO: 8/5/21 get the primary key generate method saveUser
+    // TODO: 8/5/21 set the primary key in User object
+    // TODO: 8/5/21 return User object with all data
+    public User saveUser(DataPostUser data)
     {
         User userToSave = new User(
                 data.getName(),
@@ -21,6 +24,14 @@ public class UserPersistenceService
                 data.getPassword()
         );
 
-        this.mysqlDB.saveUser(userToSave);
+        int idUser = this.mysqlDB.saveUser(userToSave);
+        if (idUser == 0)
+        {
+            throw new IllegalArgumentException("The email: " + userToSave.getEmail() +
+                    " already use");
+        }
+
+        userToSave.setId(idUser);
+        return userToSave;
     }
 }

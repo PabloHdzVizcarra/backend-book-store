@@ -1,6 +1,6 @@
 package com.pablojvm.infrastructure;
 
-import com.pablojvm.application.CrudOperationsDB;
+import com.pablojvm.application.operationsDatabase;
 import com.pablojvm.domain.User;
 
 import java.sql.Connection;
@@ -11,11 +11,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-public class MysqlDB implements CrudOperationsDB
+public class MysqlDB implements operationsDatabase
 {
 
     @Override
-    public User saveUser(User user)
+    public int saveUser(User user)
     {
         String query =
                 "INSERT INTO user(user_name, user_lastname, user_email, " +
@@ -26,8 +26,10 @@ public class MysqlDB implements CrudOperationsDB
                 "jdbc:mysql://localhost:3306/books",
                 "root",
                 "my-secret-pw"
-        ); PreparedStatement userStatement = connection.prepareStatement(query,
-                Statement.RETURN_GENERATED_KEYS))
+        ); PreparedStatement userStatement = connection.prepareStatement(
+                query,
+                Statement.RETURN_GENERATED_KEYS
+        ))
         {
             userStatement.setString(1, user.getName());
             userStatement.setString(2, user.getLastname());
@@ -35,19 +37,21 @@ public class MysqlDB implements CrudOperationsDB
             userStatement.setString(4, user.getPassword());
 
             userStatement.executeUpdate();
+            int idUserCreated = 0;
             try (ResultSet resultSet = userStatement.getGeneratedKeys())
             {
                 while (resultSet.next())
                 {
-                    System.out.println(resultSet.getInt(1));
+                    idUserCreated = resultSet.getInt(1);
                 }
             }
 
+            return idUserCreated;
 
         } catch (SQLException throwables)
         {
             throwables.printStackTrace();
         }
-        return null;
+        return 0;
     }
 }

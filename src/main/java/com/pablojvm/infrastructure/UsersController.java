@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pablojvm.application.UserPersistenceService;
 import com.pablojvm.application.ValidationService;
 import com.pablojvm.domain.DataPostUser;
+import com.pablojvm.domain.User;
 
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +30,6 @@ public class UsersController
     public void createUser(Context context) throws JsonProcessingException
     {
 
-        // TODO: 8/5/21 add service to save user in database
         // TODO: 8/5/21 add service logging messages
         String body = context.body();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -47,8 +47,10 @@ public class UsersController
 
         } else
         {
+            User saveUser = this.userPersistenceService.saveUser(data);
+
             context.status(201);
-            context.json(data);
+            context.json(saveUser);
         }
     }
 

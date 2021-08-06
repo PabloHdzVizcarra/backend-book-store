@@ -43,6 +43,11 @@ public class User
         this.id = id;
     }
 
+    public Integer getId()
+    {
+        return id;
+    }
+
     @Override
     public String toString()
     {

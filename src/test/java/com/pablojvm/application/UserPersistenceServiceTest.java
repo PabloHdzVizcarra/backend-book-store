@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserPersistenceServiceTest
 {
     @Test
-    void saveUserCorrectly()
+    void saveUserWithDuplicatedEmail()
     {
         MysqlDB mysqlDB = new MysqlDB();
 
@@ -18,8 +18,11 @@ class UserPersistenceServiceTest
                 new UserPersistenceService(mysqlDB);
 
         DataPostUser data = new DataPostUser(
-                "john", "connor", "test@example.com", "admin123");
+                "john", "connor", "data@example.com", "admin123");
 
-        service.saveUser(data);
+        assertThrows(IllegalArgumentException.class, () ->
+        {
+            service.saveUser(data);
+        });
     }
 }
