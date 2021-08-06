@@ -27,7 +27,6 @@ public class UsersController {
 
     public void createUser(Context context) throws JsonProcessingException {
 
-        // TODO: 8/5/21 add service logging messages
         String body = context.body();
         ObjectMapper objectMapper = new ObjectMapper();
         DataPostUser data =

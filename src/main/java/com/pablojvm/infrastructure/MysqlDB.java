@@ -11,12 +11,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-public class MysqlDB implements operationsDatabase
-{
+public class MysqlDB implements operationsDatabase {
 
     @Override
-    public int saveUser(User user)
-    {
+    public int saveUser(User user) {
         String query =
                 "INSERT INTO user(user_name, user_lastname, user_email, " +
                         "user_password)" +
@@ -29,8 +27,7 @@ public class MysqlDB implements operationsDatabase
         ); PreparedStatement userStatement = connection.prepareStatement(
                 query,
                 Statement.RETURN_GENERATED_KEYS
-        ))
-        {
+        )) {
             userStatement.setString(1, user.getName());
             userStatement.setString(2, user.getLastname());
             userStatement.setString(3, user.getEmail());
@@ -38,18 +35,15 @@ public class MysqlDB implements operationsDatabase
 
             userStatement.executeUpdate();
             int idUserCreated = 0;
-            try (ResultSet resultSet = userStatement.getGeneratedKeys())
-            {
-                while (resultSet.next())
-                {
+            try (ResultSet resultSet = userStatement.getGeneratedKeys()) {
+                while (resultSet.next()) {
                     idUserCreated = resultSet.getInt(1);
                 }
             }
 
             return idUserCreated;
 
-        } catch (SQLException throwables)
-        {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return 0;
