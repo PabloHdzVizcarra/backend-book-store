@@ -2,7 +2,7 @@ package com.pablojvm.user;
 
 import com.pablojvm.application.ActionsPersistenceService;
 import com.pablojvm.application.implDatabase;
-import com.pablojvm.domain.LoginData;
+import com.pablojvm.domain.DataUser;
 
 public class UserPersistenceService implements ActionsPersistenceService
 {
@@ -14,7 +14,7 @@ public class UserPersistenceService implements ActionsPersistenceService
     }
 
     @Override
-    public User saveUser(LoginData data) throws IllegalArgumentException
+    public User saveUser(DataUser data) throws IllegalArgumentException
     {
         User userToSave = new User(
                 data.getName(),

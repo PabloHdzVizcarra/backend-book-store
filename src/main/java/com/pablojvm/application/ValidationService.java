@@ -1,6 +1,6 @@
 package com.pablojvm.application;
 
-import com.pablojvm.domain.LoginData;
+import com.pablojvm.domain.DataUser;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -16,7 +16,7 @@ public class ValidationService
     {
     }
 
-    public List<String> validateDataCreateUser(LoginData data)
+    public List<String> validateDataCreateUser(DataUser data)
     {
         ArrayList<String> list = new ArrayList<>();
 
@@ -39,7 +39,7 @@ public class ValidationService
         return Collections.unmodifiableList(list);
     }
 
-    private String validatePassword(@NotNull LoginData data)
+    private String validatePassword(@NotNull DataUser data)
     {
         if (data.getPassword().length() < 8)
             return "The password: " + data.getPassword() + " is not valid, " +
@@ -48,7 +48,7 @@ public class ValidationService
         return null;
     }
 
-    private String validateEmail(@NotNull LoginData data)
+    private String validateEmail(@NotNull DataUser data)
     {
         String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
         if (!Pattern.compile(regex).matcher(data.getEmail()).matches())
@@ -58,7 +58,7 @@ public class ValidationService
         return null;
     }
 
-    private String validateLastname(@NotNull LoginData data)
+    private String validateLastname(@NotNull DataUser data)
     {
         if (data.getLastname().length() < 4)
         {
@@ -69,7 +69,7 @@ public class ValidationService
         return null;
     }
 
-    private String validateName(@NotNull LoginData data)
+    private String validateName(@NotNull DataUser data)
     {
         if (data.getName().length() < 4)
         {

@@ -1,6 +1,6 @@
 package com.pablojvm.application;
 
-import com.pablojvm.domain.LoginData;
+import com.pablojvm.domain.DataUser;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -35,7 +35,7 @@ class ValidationServiceTest
         @Test
         void validateNameWithError()
         {
-            LoginData data = new LoginData(errorName, lastname, email, password);
+            DataUser data = new DataUser(errorName, lastname, email, password);
 
 
             List<String> listErrors = service.validateDataCreateUser(data);
@@ -46,7 +46,7 @@ class ValidationServiceTest
         @Test
         void validateLastnameWithError()
         {
-            LoginData data = new LoginData(name, errorLastname, email, password);
+            DataUser data = new DataUser(name, errorLastname, email, password);
 
 
             List<String> listErrors = service.validateDataCreateUser(data);
@@ -57,7 +57,7 @@ class ValidationServiceTest
         @Test
         void validateEmailWithError()
         {
-            LoginData data = new LoginData(name, lastname, errorEmail, password);
+            DataUser data = new DataUser(name, lastname, errorEmail, password);
             List<String> list = service.validateDataCreateUser(data);
 
             assertEquals(list.size(), 1);
@@ -66,7 +66,7 @@ class ValidationServiceTest
         @Test
         void validatePasswordWithError()
         {
-            LoginData data = new LoginData(name, lastname, email, errorPassword);
+            DataUser data = new DataUser(name, lastname, email, errorPassword);
             List<String> list = service.validateDataCreateUser(data);
 
             assertEquals(list.size(), 1);
@@ -75,8 +75,8 @@ class ValidationServiceTest
         @Test
         void allFieldsNotValid()
         {
-            LoginData data =
-                    new LoginData(errorName, errorLastname, errorEmail, errorPassword);
+            DataUser data =
+                    new DataUser(errorName, errorLastname, errorEmail, errorPassword);
             List<String> list = service.validateDataCreateUser(data);
 
             assertEquals(list.size(), 4);

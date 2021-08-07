@@ -1,5 +1,8 @@
 package com.pablojvm.user;
 
+/**
+ * Represents the data in a POJO for a user to log in.
+ */
 public class LoginData {
     private String email;
     private String password;

@@ -1,6 +1,6 @@
 package com.pablojvm.application;
 
-import com.pablojvm.domain.LoginData;
+import com.pablojvm.domain.DataUser;
 import com.pablojvm.infrastructure.MysqlDB;
 import com.pablojvm.user.UserPersistenceService;
 
@@ -18,7 +18,7 @@ class UserPersistenceServiceTest
         UserPersistenceService service =
                 new UserPersistenceService(mysqlDB);
 
-        LoginData data = new LoginData(
+        DataUser data = new DataUser(
                 "john",
                 "connor",
                 "data@example.com",
