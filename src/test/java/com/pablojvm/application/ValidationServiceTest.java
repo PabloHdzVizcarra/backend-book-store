@@ -117,8 +117,9 @@ class ValidationServiceTest {
         }
 
         @Test
-        void validateErrorPassword() {
+        void validateNullPassword() {
             LoginData data = new LoginData(email, errorPassword);
+            data.setPassword(null);
             List<String> errors = service.loginData(data);
 
             assertEquals(1, errors.size());

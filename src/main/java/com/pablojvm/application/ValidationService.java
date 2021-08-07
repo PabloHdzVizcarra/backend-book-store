@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 public class ValidationService implements ValidationData {
@@ -84,6 +85,9 @@ public class ValidationService implements ValidationData {
         if (Objects.nonNull(validEmail(data.getEmail())))
             list.add(validEmail(data.getEmail()));
 
+        if (Objects.nonNull(validPassword(data.getPassword())))
+            list.add(validPassword(data.getPassword()));
+
         return list;
     }
 
@@ -94,6 +98,13 @@ public class ValidationService implements ValidationData {
             return "the email is not valid";
         if (!Pattern.compile(regex).matcher(email).matches())
             return "the email: " + email + " is not valid";
+
+        return null;
+    }
+
+    private @Nullable String validPassword(String password) {
+        if (password == null)
+            return "the password is empty, please add a password";
 
         return null;
     }
