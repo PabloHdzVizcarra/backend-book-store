@@ -1,13 +1,14 @@
 package com.pablojvm.infrastructure;
 
-import com.pablojvm.domain.DataUser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pablojvm.user.LoginData;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.annotation.Testable;
 
 import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @Testable
 class MapperImplTest {
@@ -21,12 +22,19 @@ class MapperImplTest {
 
         LoginData data = mapper.createLoginData(body);
 
-        Assertions.assertEquals("test@example.com", data.getEmail());
-        Assertions.assertEquals("admin123", data.getPassword());
+        assertEquals("test@example.com", data.getEmail());
+        assertEquals("admin123", data.getPassword());
     }
 
     @Test
     void shouldReturnErrorWithInvalidData() {
+        MapperImpl mapper = new MapperImpl();
+        String body = "{\n" +
+                "  \"\": \"\",\n" +
+                "  \"\": \"\"\n" +
+                "}";
 
+        assertThrows(JsonProcessingException.class, () ->
+        mapper.createLoginData(body));
     }
 }
