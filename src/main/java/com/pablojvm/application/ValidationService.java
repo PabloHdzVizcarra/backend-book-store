@@ -1,6 +1,7 @@
 package com.pablojvm.application;
 
 import com.pablojvm.domain.DataUser;
+import com.pablojvm.user.LoginData;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -9,15 +10,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class ValidationService
-{
+public class ValidationService implements ValidationData {
 
-    public ValidationService()
-    {
+    public ValidationService() {
     }
 
-    public List<String> validateDataCreateUser(DataUser data)
-    {
+    public List<String> validateDataCreateUser(DataUser data) {
         ArrayList<String> list = new ArrayList<>();
 
         String resultName = this.validateName(data);
@@ -39,8 +37,7 @@ public class ValidationService
         return Collections.unmodifiableList(list);
     }
 
-    private String validatePassword(@NotNull DataUser data)
-    {
+    private String validatePassword(@NotNull DataUser data) {
         if (data.getPassword().length() < 8)
             return "The password: " + data.getPassword() + " is not valid, " +
                     "should be length greater than 8";
@@ -48,20 +45,16 @@ public class ValidationService
         return null;
     }
 
-    private String validateEmail(@NotNull DataUser data)
-    {
+    private String validateEmail(@NotNull DataUser data) {
         String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
-        if (!Pattern.compile(regex).matcher(data.getEmail()).matches())
-        {
+        if (!Pattern.compile(regex).matcher(data.getEmail()).matches()) {
             return "The email: " + data.getEmail() + " is not valid";
         }
         return null;
     }
 
-    private String validateLastname(@NotNull DataUser data)
-    {
-        if (data.getLastname().length() < 4)
-        {
+    private String validateLastname(@NotNull DataUser data) {
+        if (data.getLastname().length() < 4) {
             return "The lastname: " + data.getLastname() + " is not valid, " +
                     "should be length greater than 4";
         }
@@ -69,10 +62,8 @@ public class ValidationService
         return null;
     }
 
-    private String validateName(@NotNull DataUser data)
-    {
-        if (data.getName().length() < 4)
-        {
+    private String validateName(@NotNull DataUser data) {
+        if (data.getName().length() < 4) {
             return "The name: " + data.getName() + " is not valid, should be length " +
                     "greater than 4";
         }
@@ -81,5 +72,17 @@ public class ValidationService
 
     public void validateLoginData() {
 
+    }
+
+    @Override
+    public List<String> loginData(LoginData data) {
+        ArrayList<String> list = new ArrayList<>();
+
+        String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+        if (!Pattern.compile(regex).matcher(data.getEmail()).matches()) {
+            list.add("the email: " + data.getEmail() + " is not valid");
+        }
+
+        return list;
     }
 }
