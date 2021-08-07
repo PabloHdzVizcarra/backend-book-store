@@ -77,7 +77,7 @@ public class AppControllers {
      * Handle the login to login user in the app
      * @param context an {@link Context} object
      */
-    public void loginUser(Context context) throws JsonProcessingException {
+    public void loginUser(Context context) {
         // TODO: 8/7/21 -- create new class to create POJO
         // TODO: 8/7/ validate email and password body request
         // TODO: 8/7/21 validate  password is correct

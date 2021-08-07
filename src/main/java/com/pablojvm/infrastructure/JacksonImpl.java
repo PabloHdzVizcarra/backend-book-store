@@ -12,6 +12,7 @@ public class JacksonImpl implements Mapper{
         this.objectMapper = new ObjectMapper();
     }
 
+    @Override
     public LoginData createLoginData(String body)  {
         try {
             return objectMapper.readValue(body, new TypeReference<>() {
