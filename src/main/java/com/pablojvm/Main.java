@@ -4,7 +4,7 @@ import com.pablojvm.user.UserPersistenceService;
 import com.pablojvm.application.ValidationService;
 import com.pablojvm.infrastructure.MysqlDB;
 import com.pablojvm.user.UserService;
-import com.pablojvm.user.UserController;
+import com.pablojvm.infrastructure.AppControllers;
 import com.pablojvm.util.LoggingUtil;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         LoggingUtil.initLogManager();
 
-        UserController userController = new UserController(
+        AppControllers userController = new AppControllers(
                 new UserService(
                         new ValidationService(),
                         new UserPersistenceService(
@@ -23,6 +23,6 @@ public class Main {
                 ));
 
         Javalin app = Javalin.create().start(8082);
-        app.post("/login", userController::createUser);
+        app.post("/api/v1/user/", userController::createUser);
     }
 }

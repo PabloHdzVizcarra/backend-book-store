@@ -25,8 +25,6 @@ class UserPersistenceServiceTest
                 "admin123");
 
         assertThrows(IllegalArgumentException.class, () ->
-        {
-            service.saveUser(data);
-        });
+                service.saveUser(data));
     }
 }
