@@ -1,19 +1,18 @@
 package com.pablojvm.infrastructure;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pablojvm.user.LoginData;
 
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.annotation.Testable;
 
-import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Testable
 class MapperImplTest {
+
     @Test
-    void shouldCreatePOJOCorrectly() throws IOException {
+    void shouldCreatePOJOCorrectly() {
         JacksonImpl mapper = new JacksonImpl();
         String body = "{\n" +
                 "  \"email\": \"test@example.com\",\n" +
@@ -34,7 +33,7 @@ class MapperImplTest {
                 "  \"\": \"\"\n" +
                 "}";
 
-        assertThrows(JsonProcessingException.class, () ->
-        mapper.createLoginData(body));
+        assertThrows(IllegalArgumentException.class, () ->
+                mapper.createLoginData(body));
     }
 }
