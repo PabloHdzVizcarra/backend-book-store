@@ -5,10 +5,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pablojvm.user.LoginData;
 
-public class MapperImpl implements Mapper{
+public class JacksonImpl implements Mapper{
     private final ObjectMapper objectMapper;
 
-    public MapperImpl() {
+    public JacksonImpl() {
         this.objectMapper = new ObjectMapper();
     }
 

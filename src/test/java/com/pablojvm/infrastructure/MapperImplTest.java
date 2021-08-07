@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MapperImplTest {
     @Test
     void shouldCreatePOJOCorrectly() throws IOException {
-        MapperImpl mapper = new MapperImpl();
+        JacksonImpl mapper = new JacksonImpl();
         String body = "{\n" +
                 "  \"email\": \"test@example.com\",\n" +
                 "  \"password\": \"admin123\"\n" +
@@ -28,7 +28,7 @@ class MapperImplTest {
 
     @Test
     void shouldReturnErrorWithInvalidData() {
-        MapperImpl mapper = new MapperImpl();
+        JacksonImpl mapper = new JacksonImpl();
         String body = "{\n" +
                 "  \"\": \"\",\n" +
                 "  \"\": \"\"\n" +

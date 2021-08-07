@@ -1,5 +1,6 @@
 package com.pablojvm;
 
+import com.pablojvm.infrastructure.JacksonImpl;
 import com.pablojvm.user.UserPersistenceService;
 import com.pablojvm.application.ValidationService;
 import com.pablojvm.infrastructure.MysqlDB;
@@ -17,7 +18,8 @@ public class Main {
 
         AppControllers appController = new AppControllers(
                 new UserService(new UserPersistenceService(new MysqlDB())),
-                new ValidationService()
+                new ValidationService(),
+                new JacksonImpl()
         );
 
         Javalin app = Javalin.create().start(8082);

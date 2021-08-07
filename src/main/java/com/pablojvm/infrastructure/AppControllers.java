@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pablojvm.application.ValidationService;
 import com.pablojvm.domain.DataUser;
+import com.pablojvm.user.LoginData;
 import com.pablojvm.user.User;
 import com.pablojvm.user.UserPersistenceService;
 import com.pablojvm.user.UserService;
@@ -19,15 +20,18 @@ public class AppControllers {
     private final UserService userService;
     private final ResponseErrorController errorController;
     private final ValidationService validationService;
+    private final Mapper mapper;
     private static final Logger LOGGER =
             Logger.getLogger(UserPersistenceService.class.getName());
 
     public AppControllers(
             UserService userService,
-            ValidationService validationService
+            ValidationService validationService,
+            Mapper mapper
     ) {
         this.userService = userService;
         this.validationService = validationService;
+        this.mapper = mapper;
         this.errorController = new ResponseErrorController();
     }
 
@@ -78,10 +82,7 @@ public class AppControllers {
         // TODO: 8/7/ validate email and password body request
         // TODO: 8/7/21 validate  password is correct
         String body = context.body();
-        ObjectMapper objectMapper = new ObjectMapper();
-        DataUser data =
-                objectMapper.readValue(body, new TypeReference<>() {
-                });
+        LoginData data = this.mapper.createLoginData(body);
 
         System.out.println(data);
 
