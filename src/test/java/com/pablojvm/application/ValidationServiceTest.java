@@ -35,7 +35,7 @@ class ValidationServiceTest {
         @Test
         void validateNameWithError() {
             DataUser data = new DataUser(errorName, lastname, email, password);
-            List<String> listErrors = service.validateDataCreateUser(data);
+            List<String> listErrors = service.createUser(data);
 
             assertEquals(listErrors.size(), 1);
         }
@@ -45,7 +45,7 @@ class ValidationServiceTest {
             DataUser data = new DataUser(name, errorLastname, email, password);
 
 
-            List<String> listErrors = service.validateDataCreateUser(data);
+            List<String> listErrors = service.createUser(data);
 
             assertEquals(listErrors.size(), 1);
         }
@@ -53,7 +53,7 @@ class ValidationServiceTest {
         @Test
         void validateEmailWithError() {
             DataUser data = new DataUser(name, lastname, errorEmail, password);
-            List<String> list = service.validateDataCreateUser(data);
+            List<String> list = service.createUser(data);
 
             assertEquals(list.size(), 1);
         }
@@ -61,7 +61,7 @@ class ValidationServiceTest {
         @Test
         void validatePasswordWithError() {
             DataUser data = new DataUser(name, lastname, email, errorPassword);
-            List<String> list = service.validateDataCreateUser(data);
+            List<String> list = service.createUser(data);
 
             assertEquals(list.size(), 1);
         }
@@ -70,7 +70,7 @@ class ValidationServiceTest {
         void allFieldsNotValid() {
             DataUser data =
                     new DataUser(errorName, errorLastname, errorEmail, errorPassword);
-            List<String> list = service.validateDataCreateUser(data);
+            List<String> list = service.createUser(data);
 
             assertEquals(list.size(), 4);
         }

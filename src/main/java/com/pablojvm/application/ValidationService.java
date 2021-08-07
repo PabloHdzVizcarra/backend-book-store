@@ -19,7 +19,8 @@ public class ValidationService implements ValidationData {
     public ValidationService() {
     }
 
-    public List<String> validateDataCreateUser(DataUser data) {
+    @Override
+    public List<String> createUser(DataUser data) {
         ArrayList<String> list = new ArrayList<>();
 
         String resultName = this.validateName(data);
@@ -72,10 +73,6 @@ public class ValidationService implements ValidationData {
                     "greater than 4";
         }
         return null;
-    }
-
-    public void validateLoginData() {
-
     }
 
     @Override

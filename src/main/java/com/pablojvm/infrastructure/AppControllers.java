@@ -3,7 +3,7 @@ package com.pablojvm.infrastructure;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pablojvm.application.ValidationService;
+import com.pablojvm.application.ValidationData;
 import com.pablojvm.domain.DataUser;
 import com.pablojvm.user.LoginData;
 import com.pablojvm.user.User;
@@ -19,14 +19,14 @@ import io.javalin.http.Context;
 public class AppControllers {
     private final UserService userService;
     private final ResponseErrorController errorController;
-    private final ValidationService validationService;
+    private final ValidationData validationService;
     private final Mapper mapper;
     private static final Logger LOGGER =
             Logger.getLogger(UserPersistenceService.class.getName());
 
     public AppControllers(
             UserService userService,
-            ValidationService validationService,
+            ValidationData validationService,
             Mapper mapper
     ) {
         this.userService = userService;
@@ -43,9 +43,9 @@ public class AppControllers {
                 });
 
         List<String> errorsList =
-                this.validationService.validateDataCreateUser(data);
+                validationService.createUser(data);
 
-        User saveUser = this.userService.saveUser(data);
+        User saveUser = userService.saveUser(data);
 
         if (errorsList.size() != 0) {
             this.errorController.createUser(context, errorsList);
@@ -80,9 +80,9 @@ public class AppControllers {
     public void loginUser(Context context) {
         String body = context.body();
         LoginData data = this.mapper.createLoginData(body);
+        List<String> errors = validationService.loginData(data);
 
-        System.out.println(data);
+        System.out.println(errors);
 
-        validationService.validateLoginData();
     }
 }
