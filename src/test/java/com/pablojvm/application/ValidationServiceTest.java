@@ -132,5 +132,13 @@ class ValidationServiceTest {
 
             assertEquals(1, errors.size());
         }
+
+        @Test
+        void withPasswordAndEmailInvalid() {
+            LoginData data = new LoginData(errorEmail, errorPassword);
+            List<String> errors = service.loginData(data);
+
+            assertEquals(2, errors.size());
+        }
     }
 }
