@@ -1,14 +1,14 @@
 package com.pablojvm.user;
 
 import com.pablojvm.application.ActionsPersistenceService;
-import com.pablojvm.application.operationsDatabase;
+import com.pablojvm.application.implDatabase;
 import com.pablojvm.domain.DataPostUser;
 
 public class UserPersistenceService implements ActionsPersistenceService
 {
-    private final operationsDatabase mysql;
+    private final implDatabase mysql;
 
-    public UserPersistenceService(operationsDatabase mysql)
+    public UserPersistenceService(implDatabase mysql)
     {
         this.mysql = mysql;
     }

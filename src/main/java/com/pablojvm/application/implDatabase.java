@@ -2,7 +2,7 @@ package com.pablojvm.application;
 
 import com.pablojvm.user.User;
 
-public interface operationsDatabase
+public interface implDatabase
 {
     /**
      * Implementation to save a {@link User} in database.

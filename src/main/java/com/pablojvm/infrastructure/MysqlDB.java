@@ -1,6 +1,6 @@
 package com.pablojvm.infrastructure;
 
-import com.pablojvm.application.operationsDatabase;
+import com.pablojvm.application.implDatabase;
 import com.pablojvm.user.User;
 
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class MysqlDB implements operationsDatabase {
+public class MysqlDB implements implDatabase {
     private static final Logger LOGGER =
             Logger.getLogger(MysqlDB.class.getName());
 

@@ -15,12 +15,13 @@ public class Main {
     public static void main(String[] args) throws IOException {
         LoggingUtil.initLogManager();
 
-        AppControllers userController = new AppControllers(
+        AppControllers appController = new AppControllers(
                 new UserService(new UserPersistenceService(new MysqlDB())),
                 new ValidationService()
         );
 
         Javalin app = Javalin.create().start(8082);
-        app.post("/api/v1/user/", userController::createUser);
+        app.post("/api/v1/user/", appController::createUser);
+        app.post("/api/v1/user/login", appController::loginUser);
     }
 }
