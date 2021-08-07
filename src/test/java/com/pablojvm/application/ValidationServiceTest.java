@@ -118,8 +118,16 @@ class ValidationServiceTest {
 
         @Test
         void validateNullPassword() {
-            LoginData data = new LoginData(email, errorPassword);
+            LoginData data = new LoginData(email, password);
             data.setPassword(null);
+            List<String> errors = service.loginData(data);
+
+            assertEquals(1, errors.size());
+        }
+
+        @Test
+        void validInvalidPassword() {
+            LoginData data = new LoginData(email, errorPassword);
             List<String> errors = service.loginData(data);
 
             assertEquals(1, errors.size());

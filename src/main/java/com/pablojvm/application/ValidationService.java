@@ -106,6 +106,10 @@ public class ValidationService implements ValidationData {
         if (password == null)
             return "the password is empty, please add a password";
 
+        if (password.length() < 8)
+            return "The password: " + password + " is not valid, " +
+                    "should be length greater than 8";
+
         return null;
     }
 }
