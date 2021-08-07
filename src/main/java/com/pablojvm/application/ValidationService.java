@@ -78,4 +78,8 @@ public class ValidationService
         }
         return null;
     }
+
+    public void validateLoginData() {
+
+    }
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pablojvm.application.ValidationService;
 import com.pablojvm.domain.DataPostUser;
+import com.pablojvm.user.LoginData;
 import com.pablojvm.user.User;
 import com.pablojvm.user.UserPersistenceService;
 import com.pablojvm.user.UserService;
@@ -73,9 +74,18 @@ public class AppControllers {
      * Handle the login to login user in the app
      * @param context an {@link Context} object
      */
-    public void loginUser(Context context) {
+    public void loginUser(Context context) throws JsonProcessingException {
+        // TODO: 8/7/21 -- create new class to create POJO
         // TODO: 8/7/ validate email and password body request
         // TODO: 8/7/21 validate  password is correct
+        String body = context.body();
+        ObjectMapper objectMapper = new ObjectMapper();
+        LoginData data =
+                objectMapper.readValue(body, new TypeReference<>() {
+                });
 
+        System.out.println(data);
+
+        validationService.validateLoginData();
     }
 }
