@@ -4,10 +4,12 @@ import com.pablojvm.domain.DataUser;
 import com.pablojvm.user.LoginData;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class ValidationService implements ValidationData {
@@ -78,11 +80,17 @@ public class ValidationService implements ValidationData {
     public List<String> loginData(LoginData data) {
         ArrayList<String> list = new ArrayList<>();
 
-        String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
-        if (!Pattern.compile(regex).matcher(data.getEmail()).matches()) {
-            list.add("the email: " + data.getEmail() + " is not valid");
-        }
+        if (!Objects.equals(validEmail(data.getEmail()), ""))
+            list.add(validEmail(data.getEmail()));
 
         return list;
+    }
+
+    private @Nullable String validEmail(String email) {
+        String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+        if (!Pattern.compile(regex).matcher(email).matches())
+            return "the email: " + email + " is not valid";
+
+        return null;
     }
 }
