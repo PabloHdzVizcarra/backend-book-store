@@ -98,5 +98,14 @@ class ValidationServiceTest {
 
             assertEquals(1, errors.size());
         }
+
+        @Test
+        void validateNullName() {
+            LoginData data = new LoginData(errorEmail, password);
+            data.setEmail(null);
+            List<String> errors = service.loginData(data);
+
+            assertEquals(1, errors.size());
+        }
     }
 }
