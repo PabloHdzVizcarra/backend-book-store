@@ -92,7 +92,7 @@ class ValidationServiceTest {
         }
 
         @Test
-        void validateErrorName() {
+        void validateErrorEmail() {
             LoginData data = new LoginData(errorEmail, password);
             List<String> errors = service.loginData(data);
 
@@ -100,12 +100,20 @@ class ValidationServiceTest {
         }
 
         @Test
-        void validateNullName() {
+        void validateNullEmail() {
             LoginData data = new LoginData(errorEmail, password);
             data.setEmail(null);
             List<String> errors = service.loginData(data);
 
             assertEquals(1, errors.size());
+        }
+
+        @Test
+        void validateCorrectEmail() {
+            LoginData data = new LoginData(email, password);
+            List<String> errors = service.loginData(data);
+
+            assertEquals(0, errors.size());
         }
     }
 }
