@@ -115,5 +115,13 @@ class ValidationServiceTest {
 
             assertEquals(0, errors.size());
         }
+
+        @Test
+        void validateErrorPassword() {
+            LoginData data = new LoginData(email, errorPassword);
+            List<String> errors = service.loginData(data);
+
+            assertEquals(1, errors.size());
+        }
     }
 }
