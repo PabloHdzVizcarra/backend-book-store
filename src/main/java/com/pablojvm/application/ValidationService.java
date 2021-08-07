@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class ValidationService implements ValidationData {
@@ -80,7 +81,7 @@ public class ValidationService implements ValidationData {
     public List<String> loginData(LoginData data) {
         ArrayList<String> list = new ArrayList<>();
 
-        if (!Objects.equals(validEmail(data.getEmail()), ""))
+        if (Objects.nonNull(validEmail(data.getEmail())))
             list.add(validEmail(data.getEmail()));
 
         return list;
@@ -88,6 +89,9 @@ public class ValidationService implements ValidationData {
 
     private @Nullable String validEmail(String email) {
         String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
+
+        if (email == null)
+            return "the email is not valid";
         if (!Pattern.compile(regex).matcher(email).matches())
             return "the email: " + email + " is not valid";
 
