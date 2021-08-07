@@ -1,7 +1,7 @@
 package com.pablojvm.user;
 
 import com.pablojvm.application.ActionsPersistenceService;
-import com.pablojvm.domain.DataPostUser;
+import com.pablojvm.domain.LoginData;
 
 public class UserService {
     private final ActionsPersistenceService persistenceService;
@@ -10,7 +10,7 @@ public class UserService {
         this.persistenceService = persistenceService;
     }
 
-    public User saveUser(DataPostUser data) {
+    public User saveUser(LoginData data) {
         return this.persistenceService.saveUser(data);
     }
 }

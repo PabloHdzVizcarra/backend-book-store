@@ -5,18 +5,18 @@ package com.pablojvm.domain;
  * Represents the data sent by user with which he/she expects to create a new user in
  * the application.
  */
-public class DataPostUser
+public class LoginData
 {
     private String name;
     private String lastname;
     private String email;
     private String password;
 
-    public DataPostUser()
+    public LoginData()
     {
     }
 
-    public DataPostUser(String name, String lastname, String email, String password)
+    public LoginData(String name, String lastname, String email, String password)
     {
         this.name = name;
         this.lastname = lastname;

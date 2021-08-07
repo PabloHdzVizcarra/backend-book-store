@@ -4,8 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pablojvm.application.ValidationService;
-import com.pablojvm.domain.DataPostUser;
-import com.pablojvm.user.LoginData;
+import com.pablojvm.domain.LoginData;
 import com.pablojvm.user.User;
 import com.pablojvm.user.UserPersistenceService;
 import com.pablojvm.user.UserService;
@@ -35,7 +34,7 @@ public class AppControllers {
     public void createUser(Context context) throws JsonProcessingException {
         String body = context.body();
         ObjectMapper objectMapper = new ObjectMapper();
-        DataPostUser data =
+        LoginData data =
                 objectMapper.readValue(body, new TypeReference<>() {
                 });
 
@@ -80,7 +79,7 @@ public class AppControllers {
         // TODO: 8/7/21 validate  password is correct
         String body = context.body();
         ObjectMapper objectMapper = new ObjectMapper();
-        LoginData data =
+        com.pablojvm.user.LoginData data =
                 objectMapper.readValue(body, new TypeReference<>() {
                 });
 
