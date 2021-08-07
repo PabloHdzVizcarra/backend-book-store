@@ -16,11 +16,9 @@ public class Main {
         LoggingUtil.initLogManager();
 
         AppControllers userController = new AppControllers(
-                new UserService(
-                        new ValidationService(),
-                        new UserPersistenceService(
-                                new MysqlDB())
-                ));
+                new UserService(new UserPersistenceService(new MysqlDB())),
+                new ValidationService()
+        );
 
         Javalin app = Javalin.create().start(8082);
         app.post("/api/v1/user/", userController::createUser);
