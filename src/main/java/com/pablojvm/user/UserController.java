@@ -1,7 +1,6 @@
 package com.pablojvm.user;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.pablojvm.infrastructure.UserService;
 
 import io.javalin.http.Context;
 

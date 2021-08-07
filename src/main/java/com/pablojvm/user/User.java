@@ -1,5 +1,7 @@
-package com.pablojvm.domain;
+package com.pablojvm.user;
 
+
+import com.pablojvm.domain.Password;
 
 public class User
 {

@@ -1,7 +1,8 @@
-package com.pablojvm.application;
+package com.pablojvm.user;
 
+import com.pablojvm.application.ActionsPersistenceService;
+import com.pablojvm.application.operationsDatabase;
 import com.pablojvm.domain.DataPostUser;
-import com.pablojvm.domain.User;
 
 public class UserPersistenceService implements ActionsPersistenceService
 {

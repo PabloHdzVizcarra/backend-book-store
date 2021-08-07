@@ -1,13 +1,11 @@
-package com.pablojvm.infrastructure;
+package com.pablojvm.user;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pablojvm.application.ActionsPersistenceService;
-import com.pablojvm.application.UserPersistenceService;
 import com.pablojvm.application.ValidationService;
 import com.pablojvm.domain.DataPostUser;
-import com.pablojvm.domain.User;
 
 import java.util.Collections;
 import java.util.List;

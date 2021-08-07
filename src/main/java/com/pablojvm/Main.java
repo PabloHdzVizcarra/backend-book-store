@@ -1,9 +1,9 @@
 package com.pablojvm;
 
-import com.pablojvm.application.UserPersistenceService;
+import com.pablojvm.user.UserPersistenceService;
 import com.pablojvm.application.ValidationService;
 import com.pablojvm.infrastructure.MysqlDB;
-import com.pablojvm.infrastructure.UserService;
+import com.pablojvm.user.UserService;
 import com.pablojvm.user.UserController;
 import com.pablojvm.util.LoggingUtil;
 

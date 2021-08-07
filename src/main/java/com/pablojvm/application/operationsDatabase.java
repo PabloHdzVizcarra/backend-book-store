@@ -1,6 +1,6 @@
 package com.pablojvm.application;
 
-import com.pablojvm.domain.User;
+import com.pablojvm.user.User;
 
 public interface operationsDatabase
 {

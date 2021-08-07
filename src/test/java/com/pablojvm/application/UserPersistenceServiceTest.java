@@ -2,6 +2,7 @@ package com.pablojvm.application;
 
 import com.pablojvm.domain.DataPostUser;
 import com.pablojvm.infrastructure.MysqlDB;
+import com.pablojvm.user.UserPersistenceService;
 
 import org.junit.jupiter.api.Test;
 

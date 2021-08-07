@@ -1,6 +1,6 @@
 package com.pablojvm.infrastructure;
 
-import com.pablojvm.domain.User;
+import com.pablojvm.user.User;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;

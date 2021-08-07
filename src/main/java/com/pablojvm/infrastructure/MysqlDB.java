@@ -1,8 +1,7 @@
 package com.pablojvm.infrastructure;
 
-import com.pablojvm.application.UserPersistenceService;
 import com.pablojvm.application.operationsDatabase;
-import com.pablojvm.domain.User;
+import com.pablojvm.user.User;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
