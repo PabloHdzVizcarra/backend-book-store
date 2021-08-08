@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -61,9 +62,7 @@ public class MysqlDB implements implDatabase {
     }
 
     @Override
-    public User getUser(String email) {
-        // TODO: 8/8/21 get the user from mysql
-        // TODO: 8/8/21 create and return object User
+    public Optional<User> getUser(String email) {
         String query =
                 "SELECT user_id, user_name, user_lastname, user_email, user_password " +
                         "FROM user WHERE user_email=?";
@@ -75,7 +74,7 @@ public class MysqlDB implements implDatabase {
             preparedStatement.execute();
             User user = null;
 
-            try (ResultSet resultSet = preparedStatement.getResultSet()){
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
                 while (resultSet.next()) {
                     int id = Integer.parseInt(resultSet.getString("user_id"));
                     String name = resultSet.getString("user_name");
@@ -87,11 +86,13 @@ public class MysqlDB implements implDatabase {
                 }
             }
 
-            return user;
+            if (user != null)
+                return Optional.of(user);
 
+            return Optional.empty();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return null;
+        return Optional.empty();
     }
 }

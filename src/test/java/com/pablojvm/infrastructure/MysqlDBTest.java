@@ -2,20 +2,27 @@ package com.pablojvm.infrastructure;
 
 import com.pablojvm.user.User;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @Disabled
 class MysqlDBTest {
+    MysqlDB mysql;
+
+    @BeforeEach
+    void beforeEach() {
+        mysql = new MysqlDB();
+    }
 
     @Test
     @DisplayName("should return 0 when the user cannot be created")
     void errorEmail() {
-        MysqlDB mysql = new MysqlDB();
-
         User user = new User("john", "carter",
                 "example@example.com", "admin123"
         );
@@ -27,9 +34,9 @@ class MysqlDBTest {
 
     @Test
     void getUserWhenValidEmail() {
-        MysqlDB mysql = new MysqlDB();
         String email = "test@example.com";
-        User user = mysql.getUser(email);
+        Optional<User> optionalUser = mysql.getUser(email);
+        User user = optionalUser.get();
 
         assertNotNull(user.getId());
         assertNotNull(user.getName());
@@ -37,5 +44,13 @@ class MysqlDBTest {
         assertNotNull(user.getEmail());
         assertNotNull(user.getPassword());
         assertEquals(email, user.getEmail());
+    }
+
+    @Test
+    void whenInvalidEmail() {
+        String emailInvalid = "error@email.com";
+        Optional<User> optionalUser = mysql.getUser(emailInvalid);
+
+        assertTrue(optionalUser.isEmpty());
     }
 }

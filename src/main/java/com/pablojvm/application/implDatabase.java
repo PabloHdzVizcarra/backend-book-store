@@ -2,6 +2,8 @@ package com.pablojvm.application;
 
 import com.pablojvm.user.User;
 
+import java.util.Optional;
+
 public interface implDatabase
 {
     /**
@@ -12,5 +14,5 @@ public interface implDatabase
      */
     int saveUser(User user);
 
-    User getUser(String email);
+    Optional<User> getUser(String email);
 }
