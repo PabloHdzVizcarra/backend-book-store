@@ -33,4 +33,9 @@ public class ResponseErrorController {
         context.status(400);
         context.json(list);
     }
+
+    public void withMessage(Context context, String message) {
+        context.status(404);
+        context.result(message);
+    }
 }
