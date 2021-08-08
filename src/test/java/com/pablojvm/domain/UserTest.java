@@ -27,7 +27,6 @@ class UserTest {
         String password = "admin123";
 
         User user = new User(name, lastname, email, password);
-        System.out.println(user.getPassword());
         assertTrue(user.comparePassword(password));
     }
 }
