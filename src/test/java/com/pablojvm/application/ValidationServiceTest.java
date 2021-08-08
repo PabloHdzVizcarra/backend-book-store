@@ -6,13 +6,11 @@ import com.pablojvm.user.LoginData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.commons.annotation.Testable;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Testable
 class ValidationServiceTest {
 
     @Nested

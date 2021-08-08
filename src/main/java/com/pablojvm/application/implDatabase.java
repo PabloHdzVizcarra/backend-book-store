@@ -2,10 +2,8 @@ package com.pablojvm.application;
 
 import com.pablojvm.user.User;
 
-import org.jetbrains.annotations.Nullable;
 
-public interface implDatabase
-{
+public interface implDatabase {
     /**
      * Implementation to save a {@link User} in database.
      *
