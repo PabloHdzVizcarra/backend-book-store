@@ -1,10 +1,8 @@
 package com.pablojvm.user;
 
-
 import com.pablojvm.domain.Password;
 
-public class User
-{
+public class User {
     private final String name;
     private final String lastname;
     private final String email;
@@ -12,8 +10,7 @@ public class User
     private Integer id;
 
 
-    public User(String name, String lastname, String email, String password)
-    {
+    public User(String name, String lastname, String email, String password) {
         this.name = name.toLowerCase();
         this.lastname = lastname.toLowerCase();
         this.email = email;
@@ -34,39 +31,32 @@ public class User
         this.password = password;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public String getLastname()
-    {
+    public String getLastname() {
         return lastname;
     }
 
-    public String getEmail()
-    {
+    public String getEmail() {
         return email;
     }
 
-    public String getPassword()
-    {
+    public String getPassword() {
         return password;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +

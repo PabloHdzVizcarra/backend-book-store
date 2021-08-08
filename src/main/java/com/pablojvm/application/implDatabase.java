@@ -2,7 +2,7 @@ package com.pablojvm.application;
 
 import com.pablojvm.user.User;
 
-import java.util.Optional;
+import org.jetbrains.annotations.Nullable;
 
 public interface implDatabase
 {
@@ -13,6 +13,5 @@ public interface implDatabase
      * @return the id of user created in the database, otherwise it will return 0
      */
     int saveUser(User user);
-
-    Optional<User> getUser(String email);
+    User getUser(String email);
 }

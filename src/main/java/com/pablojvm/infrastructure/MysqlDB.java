@@ -3,13 +3,14 @@ package com.pablojvm.infrastructure;
 import com.pablojvm.application.implDatabase;
 import com.pablojvm.user.User;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,7 +63,7 @@ public class MysqlDB implements implDatabase {
     }
 
     @Override
-    public Optional<User> getUser(String email) {
+    public User getUser(String email) {
         String query =
                 "SELECT user_id, user_name, user_lastname, user_email, user_password " +
                         "FROM user WHERE user_email=?";
@@ -86,13 +87,10 @@ public class MysqlDB implements implDatabase {
                 }
             }
 
-            if (user != null)
-                return Optional.of(user);
-
-            return Optional.empty();
+            return user;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return Optional.empty();
+        return null;
     }
 }

@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,8 +34,7 @@ class MysqlDBTest {
     @Test
     void getUserWhenValidEmail() {
         String email = "test@example.com";
-        Optional<User> optionalUser = mysql.getUser(email);
-        User user = optionalUser.get();
+        User user = mysql.getUser(email);
 
         assertNotNull(user.getId());
         assertNotNull(user.getName());
@@ -49,8 +47,8 @@ class MysqlDBTest {
     @Test
     void whenInvalidEmail() {
         String emailInvalid = "error@email.com";
-        Optional<User> optionalUser = mysql.getUser(emailInvalid);
+        User user = mysql.getUser(emailInvalid);
 
-        assertTrue(optionalUser.isEmpty());
+        assertNull(user);
     }
 }
