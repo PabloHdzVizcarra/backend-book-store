@@ -51,4 +51,11 @@ class MysqlDBTest {
 
         assertNull(user);
     }
+
+    @Test
+    void whenNullEmail() {
+        User user = mysql.getUser(null);
+
+        assertNull(user);
+    }
 }
