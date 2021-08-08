@@ -24,4 +24,11 @@ class MysqlDBTest {
 
         assertEquals(0, idUser);
     }
+
+    @Test
+    void getUserWhenValidEmail() {
+        MysqlDB mysql = new MysqlDB();
+        String email = "test@example.com";
+        User user = mysql.getUser(email);
+    }
 }
