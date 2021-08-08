@@ -11,4 +11,6 @@ public interface ActionsPersistenceService {
      * @return an {@link User} or null if the object could not be created.
      */
     User saveUser(DataUser data);
+
+    User getUser(String email);
 }

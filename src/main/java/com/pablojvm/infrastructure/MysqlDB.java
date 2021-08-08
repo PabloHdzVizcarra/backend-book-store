@@ -17,6 +17,11 @@ public class MysqlDB implements implDatabase {
     private static final Logger LOGGER =
             Logger.getLogger(MysqlDB.class.getName());
 
+    private final String URL =
+            "jdbc:mysql://localhost:3306/books";
+    private final String USER = "root";
+    private final String PASS = "my-secret-pw";
+
     @Override
     public int saveUser(User user) {
         String query =
@@ -24,14 +29,12 @@ public class MysqlDB implements implDatabase {
                         "user_password)" +
                         "VALUE (?, ?, ?, ?)";
 
-        try (Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/books",
-                "root",
-                "my-secret-pw"
-        ); PreparedStatement userStatement = connection.prepareStatement(
-                query,
-                Statement.RETURN_GENERATED_KEYS
-        )) {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASS);
+             PreparedStatement userStatement = connection.prepareStatement(
+                     query,
+                     Statement.RETURN_GENERATED_KEYS
+             )) {
+
             userStatement.setString(1, user.getName());
             userStatement.setString(2, user.getLastname());
             userStatement.setString(3, user.getEmail());
@@ -55,5 +58,21 @@ public class MysqlDB implements implDatabase {
             );
         }
         return 0;
+    }
+
+    @Override
+    public User getUser(String email) {
+        // TODO: 8/8/21 get the user from mysql
+        String query =
+                "SELECT user_id, user_name, user_lastname, user_email, user_password " +
+                        "FROM user WHERE user_email=?";
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASS);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 }

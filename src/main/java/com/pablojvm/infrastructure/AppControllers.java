@@ -90,5 +90,8 @@ public class AppControllers {
             );
         }
 
+        // TODO: 8/8/21 get the user from DB
+        User user = this.userService.getUser(data.getEmail());
+
     }
 }

@@ -11,4 +11,6 @@ public interface implDatabase
      * @return the id of user created in the database, otherwise it will return 0
      */
     int saveUser(User user);
+
+    User getUser(String email);
 }

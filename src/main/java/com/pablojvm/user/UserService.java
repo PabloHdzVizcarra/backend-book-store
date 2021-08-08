@@ -13,4 +13,8 @@ public class UserService {
     public User saveUser(DataUser data) {
         return this.persistenceService.saveUser(data);
     }
+
+    public User getUser(String email) {
+        return this.persistenceService.getUser(email);
+    }
 }
