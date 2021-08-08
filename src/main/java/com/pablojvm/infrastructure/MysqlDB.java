@@ -63,12 +63,31 @@ public class MysqlDB implements implDatabase {
     @Override
     public User getUser(String email) {
         // TODO: 8/8/21 get the user from mysql
+        // TODO: 8/8/21 create and return object User
         String query =
                 "SELECT user_id, user_name, user_lastname, user_email, user_password " +
                         "FROM user WHERE user_email=?";
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASS);
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, email);
+            preparedStatement.execute();
+            User user = null;
+
+            try (ResultSet resultSet = preparedStatement.getResultSet()){
+                while (resultSet.next()) {
+                    int id = Integer.parseInt(resultSet.getString("user_id"));
+                    String name = resultSet.getString("user_name");
+                    String lastname = resultSet.getString("user_lastname");
+                    String userEmail = resultSet.getString("user_email");
+                    String password = resultSet.getString("user_password");
+
+                    user = new User(id, name, lastname, userEmail, password);
+                }
+            }
+
+            return user;
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -30,5 +30,12 @@ class MysqlDBTest {
         MysqlDB mysql = new MysqlDB();
         String email = "test@example.com";
         User user = mysql.getUser(email);
+
+        assertNotNull(user.getId());
+        assertNotNull(user.getName());
+        assertNotNull(user.getLastname());
+        assertNotNull(user.getEmail());
+        assertNotNull(user.getPassword());
+        assertEquals(email, user.getEmail());
     }
 }

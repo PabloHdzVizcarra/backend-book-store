@@ -20,6 +20,20 @@ public class User
         this.password = Password.create(password);
     }
 
+    public User(
+            Integer id,
+            String name,
+            String lastname,
+            String email,
+            String password
+    ) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+    }
+
     public String getName()
     {
         return name;
