@@ -55,6 +55,10 @@ public class User {
         return id;
     }
 
+    public boolean comparePassword(String password) {
+        return Password.compare(password, this.password);
+    }
+
     @Override
     public String toString() {
         return "User{" +
