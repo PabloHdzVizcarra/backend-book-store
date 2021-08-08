@@ -6,7 +6,7 @@ import java.util.List;
 
 import io.javalin.http.Context;
 
-public class ResponseErrorController {
+public class ResponseError {
     public void withInvalidEmail(Context context) {
         context.status(400);
         context.result("The email is duplicated, please add another email.");

@@ -18,7 +18,8 @@ import io.javalin.http.Context;
 
 public class AppControllers {
     private final UserService userService;
-    private final ResponseErrorController errorController;
+    private final ResponseError errorResponse;
+    private final ResponseOk validResponse;
     private final ValidationData validationService;
     private final Mapper mapper;
     private static final Logger LOGGER =
@@ -32,7 +33,8 @@ public class AppControllers {
         this.userService = userService;
         this.validationService = validationService;
         this.mapper = mapper;
-        this.errorController = new ResponseErrorController();
+        this.errorResponse = new ResponseError();
+        this.validResponse = new ResponseOk();
     }
 
     public void createUser(Context context) throws JsonProcessingException {
@@ -48,7 +50,7 @@ public class AppControllers {
         User saveUser = userService.saveUser(data);
 
         if (errorsList.size() != 0) {
-            this.errorController.createUser(context, errorsList);
+            this.errorResponse.createUser(context, errorsList);
             LOGGER.log(
                     Level.INFO,
                     "an attempt was made to create a user with the following" +
@@ -59,7 +61,7 @@ public class AppControllers {
                     Level.INFO,
                     "failed to save the user in the database"
             );
-            this.errorController.withInvalidEmail(context);
+            this.errorResponse.withInvalidEmail(context);
         } else {
             LOGGER.log(
                     Level.INFO,
@@ -79,11 +81,11 @@ public class AppControllers {
      */
     public void loginUser(Context context) {
         String body = context.body();
-        LoginData data = this.mapper.createLoginData(body);
-        List<String> errors = validationService.loginData(data);
+        LoginData dataRequest = this.mapper.createLoginData(body);
+        List<String> errors = this.validationService.loginData(dataRequest);
 
         if (!errors.isEmpty()) {
-            this.errorController.withInvalidLoginData(context, errors);
+            this.errorResponse.withInvalidLoginData(context, errors);
             LOGGER.log(
                     Level.INFO,
                     "an attempt was made to create a user with the following" +
@@ -92,15 +94,17 @@ public class AppControllers {
             return;
         }
 
-        User user = this.userService.getUser(data.getEmail());
+        User user = this.userService.getUser(dataRequest.getEmail());
         if (user == null) {
-            String message = "The user with the email: " + data.getEmail() +
+            String message = "The user with the email: " + dataRequest.getEmail() +
                     " is not exists in the database";
-            this.errorController.withMessage(context, message);
+            this.errorResponse.withMessage(context, message);
             LOGGER.log(Level.INFO, message);
             return;
         }
 
+        if (user.comparePassword(dataRequest.getPassword()))
+            this.validResponse.withCookie(context, dataRequest);
 
     }
 }
