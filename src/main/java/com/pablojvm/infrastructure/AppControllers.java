@@ -74,6 +74,7 @@ public class AppControllers {
 
     /**
      * Handle the login to login user in the app
+     *
      * @param context an {@link Context} object
      */
     public void loginUser(Context context) {
@@ -88,9 +89,18 @@ public class AppControllers {
                     "an attempt was made to create a user with the following" +
                             "invalid data: " + errors
             );
+            return;
         }
 
         User user = this.userService.getUser(data.getEmail());
-        System.out.println(user);
+        if (user == null) {
+            String message = "The user with the email: " + data.getEmail() +
+                    " is not exists in the database";
+            this.errorController.withMessage(context, message);
+            LOGGER.log(Level.INFO, message);
+            return;
+        }
+
+
     }
 }
