@@ -3,8 +3,6 @@ package com.pablojvm.infrastructure;
 import com.pablojvm.application.implDatabase;
 import com.pablojvm.user.User;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletRequest;
+
 import io.javalin.http.Context;
 
 public class AppControllers {
@@ -90,8 +92,7 @@ public class AppControllers {
             );
         }
 
-        // TODO: 8/8/21 get the user from DB
         User user = this.userService.getUser(data.getEmail());
-
+        System.out.println(user);
     }
 }
