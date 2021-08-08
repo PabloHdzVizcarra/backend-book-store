@@ -1,5 +1,6 @@
 package com.pablojvm.infrastructure;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -17,5 +18,19 @@ public class ResponseErrorController {
         context.status(400);
         context.json(errorList);
 
+    }
+
+    /**
+     * Create a response when the user sends invalid data when tying to log in.
+     *
+     * @param context a {@link Context} object
+     * @param errors A list containing error messages
+     */
+    public void withInvalidLoginData(Context context, List<String> errors) {
+        List<String> list = new ArrayList<>(errors);
+        list.add("Invalidad data was sent when logging a user in.");
+        Collections.reverse(list);
+        context.status(400);
+        context.json(list);
     }
 }

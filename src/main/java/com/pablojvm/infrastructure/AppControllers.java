@@ -78,9 +78,13 @@ public class AppControllers {
      * @param context an {@link Context} object
      */
     public void loginUser(Context context) {
+        // TODO: 8/8/21 response with arrays errors
         String body = context.body();
         LoginData data = this.mapper.createLoginData(body);
         List<String> errors = validationService.loginData(data);
+
+        if (!errors.isEmpty())
+            this.errorController.withInvalidLoginData(context, errors);
 
         System.out.println(errors);
 
