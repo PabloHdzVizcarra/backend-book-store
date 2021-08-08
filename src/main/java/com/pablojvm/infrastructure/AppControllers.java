@@ -49,7 +49,6 @@ public class AppControllers {
 
         if (errorsList.size() != 0) {
             this.errorController.createUser(context, errorsList);
-
             LOGGER.log(
                     Level.INFO,
                     "an attempt was made to create a user with the following" +
@@ -78,15 +77,18 @@ public class AppControllers {
      * @param context an {@link Context} object
      */
     public void loginUser(Context context) {
-        // TODO: 8/8/21 response with arrays errors
         String body = context.body();
         LoginData data = this.mapper.createLoginData(body);
         List<String> errors = validationService.loginData(data);
 
-        if (!errors.isEmpty())
+        if (!errors.isEmpty()) {
             this.errorController.withInvalidLoginData(context, errors);
-
-        System.out.println(errors);
+            LOGGER.log(
+                    Level.INFO,
+                    "an attempt was made to create a user with the following" +
+                            "invalid data: " + errors
+            );
+        }
 
     }
 }
