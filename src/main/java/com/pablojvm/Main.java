@@ -25,5 +25,6 @@ public class Main {
         Javalin app = Javalin.create().start(8082);
         app.post("/api/v1/user/", appController::createUser);
         app.post("/api/v1/user/login", appController::loginUser);
+        app.get("/api/v1/user/auth", appController::autoLogin);
     }
 }
