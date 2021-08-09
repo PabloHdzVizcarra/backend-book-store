@@ -29,4 +29,9 @@ public class JwtImpl implements JwtService {
                 .signWith(Keys.hmacShaKeyFor(secret))
                 .compact();
     }
+
+    @Override
+    public void validateCookie(String cookie) {
+
+    }
 }
