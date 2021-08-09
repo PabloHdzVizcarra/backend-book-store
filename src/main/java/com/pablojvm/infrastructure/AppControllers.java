@@ -41,7 +41,7 @@ public class AppControllers {
 
     /**
      * Handle logic to create one user in the app
-     * 
+     *
      * @param context An object {@link Context}
      * @throws JsonProcessingException some error
      */
@@ -122,8 +122,10 @@ public class AppControllers {
      * @param context A {@link Context} object
      */
     public void autoLogin(Context context) {
-        String cookie = context.cookie("javalin-cookie-store");
+        String cookie = context.cookie("login");
+        LoginData data = this.jwtService.validateCookie(cookie);
 
-        System.out.println(cookie);
+        User user = this.userService.getUser(data.getEmail());
+        System.out.println(user);
     }
 }
