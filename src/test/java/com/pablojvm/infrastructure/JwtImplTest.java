@@ -17,5 +17,6 @@ class JwtImplTest {
 
         LoginData data = jwt.validateCookie(cookie);
         assertEquals(data.getEmail(), email);
+        assertEquals(data.getPassword(), password);
     }
 }

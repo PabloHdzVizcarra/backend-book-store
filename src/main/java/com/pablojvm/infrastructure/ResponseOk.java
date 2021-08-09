@@ -16,7 +16,7 @@ public class ResponseOk {
                 dataRequest.getEmail(),
                 dataRequest.getPassword()
         );
-        context.cookieStore("login", jwt);
+        context.cookie("login", jwt);
         context.status(200);
     }
 }

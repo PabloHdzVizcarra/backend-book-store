@@ -2,7 +2,6 @@ package com.pablojvm.infrastructure;
 
 import com.pablojvm.user.LoginData;
 
-import org.jetbrains.annotations.Nullable;
 
 public interface JwtService {
     String createCookie(String email, String password);
@@ -13,6 +12,7 @@ public interface JwtService {
      *
      * @param cookie A cookie in string format
      * @return A {@link LoginData} object or null
+     * @throws IllegalArgumentException if there is an error validating the cookie
      */
-    LoginData validateCookie(String cookie);
+    LoginData validateCookie(String cookie) throws IllegalArgumentException;
 }

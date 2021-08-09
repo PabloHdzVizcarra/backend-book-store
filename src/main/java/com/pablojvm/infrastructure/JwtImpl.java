@@ -2,7 +2,6 @@ package com.pablojvm.infrastructure;
 
 import com.pablojvm.user.LoginData;
 
-
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Base64;
@@ -14,6 +13,7 @@ import javax.crypto.SecretKey;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
@@ -34,19 +34,27 @@ public class JwtImpl implements JwtService {
         Instant now = Instant.now();
 
         return Jwts.builder()
-                .setSubject("admin")
+                .setIssuer("pablo")
+                .setSubject("user")
+                .setAudience("all")
+                .setExpiration(Date.from(now.plus(1, ChronoUnit.DAYS)))
                 .setHeader(passAndEmail)
-                .setExpiration(Date.from(now.plus(5, ChronoUnit.MINUTES)))
                 .signWith(key)
                 .compact();
     }
 
     @Override
-    public LoginData validateCookie(String cookie) {
-        Jws<Claims> claimsJws = Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(cookie);
+    public LoginData validateCookie(String cookie) throws IllegalArgumentException {
+        Jws<Claims> claimsJws;
+        try {
+            claimsJws = Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(cookie);
+        } catch (JwtException error) {
+            error.printStackTrace();
+            throw new IllegalArgumentException(error.getMessage());
+        }
 
         String email = (String) claimsJws.getHeader().get("email");
         String password = (String) claimsJws.getHeader().get("password");
