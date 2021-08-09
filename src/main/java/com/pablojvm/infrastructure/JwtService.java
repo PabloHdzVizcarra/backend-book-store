@@ -14,5 +14,5 @@ public interface JwtService {
      * @param cookie A cookie in string format
      * @return A {@link LoginData} object or null
      */
-    @Nullable LoginData validateCookie(String cookie);
+    LoginData validateCookie(String cookie);
 }

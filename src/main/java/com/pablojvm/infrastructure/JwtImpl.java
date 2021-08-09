@@ -37,7 +37,7 @@ public class JwtImpl implements JwtService {
     }
 
     @Override
-    public @Nullable LoginData validateCookie(String cookie) {
+    public LoginData validateCookie(String cookie) {
         byte[] secret = Base64.getDecoder().decode("tOX" +
                 "+BgAa4v1jS0Kjvs9gRtpdiNtWHwvekd7VgNUUJwo=");
         Jws<Claims> claimsJws = Jwts.parserBuilder()
