@@ -37,6 +37,12 @@ public class AppControllers {
         this.validResponse = new ResponseOk();
     }
 
+    /**
+     * Handle logic to create one user in the app
+     * 
+     * @param context An object {@link Context}
+     * @throws JsonProcessingException some error
+     */
     public void createUser(Context context) throws JsonProcessingException {
         String body = context.body();
         ObjectMapper objectMapper = new ObjectMapper();

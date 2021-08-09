@@ -11,6 +11,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
 public class JwtImpl implements JwtService {
+
     @Override
     public String createCookie(String email, String password) {
         Map<String, Object> passAndEmail = new HashMap<>();
