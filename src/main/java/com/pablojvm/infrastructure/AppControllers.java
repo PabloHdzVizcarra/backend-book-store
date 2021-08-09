@@ -131,7 +131,14 @@ public class AppControllers {
                     e.getMessage());
         }
 
+        if (data == null) {
+            this.errorResponse.withMessage(context, "An error occurred while validating" +
+                    " the user");
+            return;
+        }
+
         User user = this.userService.getUser(data.getEmail());
-        System.out.println(user);
+
+        this.validResponse.withDataUser(context, user);
     }
 }
