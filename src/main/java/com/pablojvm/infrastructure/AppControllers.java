@@ -148,5 +148,6 @@ public class AppControllers {
 
         User user = this.userService.getUser(data.getEmail());
         this.validResponse.withDataUser(context, user);
+        LOGGER.log(Level.INFO, "The user: " + user + " logging in the app");
     }
 }
