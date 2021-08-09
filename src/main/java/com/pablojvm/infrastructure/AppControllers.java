@@ -138,7 +138,6 @@ public class AppControllers {
         }
 
         User user = this.userService.getUser(data.getEmail());
-
         this.validResponse.withDataUser(context, user);
     }
 }

@@ -1,6 +1,7 @@
 package com.pablojvm.infrastructure;
 
 import com.pablojvm.user.LoginData;
+import com.pablojvm.user.User;
 
 import io.javalin.http.Context;
 
@@ -18,5 +19,10 @@ public class ResponseOk {
         );
         context.cookie("login", jwt);
         context.status(200);
+    }
+
+    public void withDataUser(Context context, User user) {
+        context.status(200);
+        context.json(user);
     }
 }
