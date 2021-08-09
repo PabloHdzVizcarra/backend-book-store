@@ -123,7 +123,13 @@ public class AppControllers {
      */
     public void autoLogin(Context context) {
         String cookie = context.cookie("login");
-        LoginData data = this.jwtService.validateCookie(cookie);
+        LoginData data = null;
+        try {
+            data = this.jwtService.validateCookie(cookie);
+        } catch (IllegalArgumentException e) {
+            LOGGER.log(Level.WARNING, "An error occurred while validating the user" +
+                    e.getMessage());
+        }
 
         User user = this.userService.getUser(data.getEmail());
         System.out.println(user);
