@@ -24,6 +24,7 @@ public class AppControllers {
     private final Mapper mapper;
     private static final Logger LOGGER =
             Logger.getLogger(UserPersistenceService.class.getName());
+    private final JwtService jwtService;
 
     public AppControllers(
             UserService userService,
@@ -35,6 +36,7 @@ public class AppControllers {
         this.mapper = mapper;
         this.errorResponse = new ResponseError();
         this.validResponse = new ResponseOk();
+        this.jwtService = new JwtImpl();
     }
 
     /**
@@ -112,5 +114,16 @@ public class AppControllers {
         if (user.comparePassword(dataRequest.getPassword()))
             this.validResponse.withCookie(context, dataRequest);
 
+    }
+
+    /**
+     * HTTP endpoint that handles application autologin
+     *
+     * @param context A {@link Context} object
+     */
+    public void autoLogin(Context context) {
+        String cookie = context.cookie("javalin-cookie-store");
+
+        System.out.println(cookie);
     }
 }
