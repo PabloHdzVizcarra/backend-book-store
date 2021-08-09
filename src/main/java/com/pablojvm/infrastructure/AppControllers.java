@@ -123,6 +123,15 @@ public class AppControllers {
      */
     public void autoLogin(Context context) {
         String cookie = context.cookie("login");
+
+        if (cookie == null) {
+            LOGGER.log(Level.INFO, "try logging into server with missing cookie");
+            this.errorResponse.withMessage(
+                    context, "Missing cookie in the request, please check your request " +
+                            "to server");
+            return;
+        }
+
         LoginData data = null;
         try {
             data = this.jwtService.validateCookie(cookie);
