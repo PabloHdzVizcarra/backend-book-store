@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
@@ -32,6 +34,13 @@ public class JwtImpl implements JwtService {
 
     @Override
     public void validateCookie(String cookie) {
+        byte[] secret = Base64.getDecoder().decode("tOX" +
+                "+BgAa4v1jS0Kjvs9gRtpdiNtWHwvekd7VgNUUJwo=");
+        Jws<Claims> claimsJws = Jwts.parserBuilder()
+                .setSigningKey(Keys.hmacShaKeyFor(secret))
+                .build()
+                .parseClaimsJws(cookie);
 
+        System.out.println(claimsJws.getHeader());
     }
 }
