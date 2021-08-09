@@ -1,5 +1,9 @@
 package com.pablojvm.infrastructure;
 
+import com.pablojvm.user.LoginData;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Base64;
@@ -33,7 +37,7 @@ public class JwtImpl implements JwtService {
     }
 
     @Override
-    public void validateCookie(String cookie) {
+    public @Nullable LoginData validateCookie(String cookie) {
         byte[] secret = Base64.getDecoder().decode("tOX" +
                 "+BgAa4v1jS0Kjvs9gRtpdiNtWHwvekd7VgNUUJwo=");
         Jws<Claims> claimsJws = Jwts.parserBuilder()
@@ -41,6 +45,9 @@ public class JwtImpl implements JwtService {
                 .build()
                 .parseClaimsJws(cookie);
 
-        System.out.println(claimsJws.getHeader());
+        String email = (String) claimsJws.getHeader().get("email");
+        String password = (String) claimsJws.getHeader().get("password");
+
+        return new LoginData(email, password);
     }
 }
