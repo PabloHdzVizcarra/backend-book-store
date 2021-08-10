@@ -191,11 +191,28 @@ public class AppControllers {
             return;
         }
 
-        if (user.comparePassword(dataCookie.getPassword())) {
-            this.validResponse.withCookie(context, dataCookie);
+        if (!user.comparePassword(dataCookie.getPassword())) {
+            this.errorResponse.withMessage(
+                    context,
+                    "the password: " + dataCookie.getPassword() +
+                            " is not valid"
+            );
             return;
         }
 
         boolean isDeleted = this.userService.deleteUser(dataCookie);
+        if (!isDeleted) {
+            this.errorResponse.withMessage(
+                    context,
+                    "a problem occurred when deleting the user from the database"
+            );
+            return;
+        }
+
+        this.validResponse.withMessage(
+                context,
+                "The user when the email: " + user.getEmail() +
+                        " and id:  " + user.getId() + " is deleted from the database"
+        );
     }
 }

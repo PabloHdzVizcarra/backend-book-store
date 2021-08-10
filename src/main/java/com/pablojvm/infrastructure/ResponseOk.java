@@ -25,4 +25,9 @@ public class ResponseOk {
         context.status(200);
         context.json(user);
     }
+
+    public void withMessage(Context context, String message) {
+        context.status(201);
+        context.result(message);
+    }
 }
