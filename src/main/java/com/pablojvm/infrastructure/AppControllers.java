@@ -151,9 +151,37 @@ public class AppControllers {
         LOGGER.log(Level.INFO, "The user: " + user + " logging in the app");
     }
 
+    /**
+     * Delete a user from the database if the user exists
+     *
+     * @param context a {@link Context} object
+     */
     public void deleteUser(Context context) {
         // TODO: 8/10/21 check request contains cookie
         // TODO: 8/10/21 validate cookie
         // TODO: 8/10/21 delete user from database
+
+        String cookie = context.cookie("login");
+        if (cookie == null) {
+            LOGGER.log(Level.INFO, "try logging into server with missing cookie");
+            this.errorResponse.withMessage(
+                    context, "Missing cookie in the request, please check your request " +
+                            "to server");
+            return;
+        }
+
+        LoginData loginData = null;
+        try {
+            loginData = this.jwtService.validateCookie(cookie);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+
+        if (loginData == null) {
+            this.errorResponse.withMessage(context, "An error occurred while validating" +
+                    " the user");
+            return;
+        }
+
     }
 }
