@@ -177,7 +177,7 @@ public class AppControllers {
             e.printStackTrace();
         }
 
-        if (loginData == null) {
+        if (loginData == null || loginData.getEmail() == null) {
             this.errorResponse.withMessage(context, "An error occurred while validating" +
                     " the user");
             return;
