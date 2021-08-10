@@ -62,7 +62,7 @@ class MysqlDBTest {
     @Test
     @DisplayName("should delete a user when email is valid")
     void deleteUser() {
-        boolean isDeleted = mysql.deleteUser("null@data.com");
+        boolean isDeleted = mysql.deleteUser("some@data.com");
 
         assertTrue(isDeleted);
     }

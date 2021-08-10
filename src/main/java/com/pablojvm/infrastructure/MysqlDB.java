@@ -93,7 +93,18 @@ public class MysqlDB implements implDatabase {
     }
 
     @Override
-    public void deleteUser(String email) {
+    public boolean deleteUser(String email) {
+        String query = "DELETE FROM user WHERE user_email=?";
 
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASS);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, email);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 }
