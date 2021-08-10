@@ -26,5 +26,7 @@ public class Main {
         app.post("/api/v1/user/", appController::createUser);
         app.post("/api/v1/user/login", appController::loginUser);
         app.get("/api/v1/user/auth", appController::autoLogin);
+        // TODO: 8/10/21 create new endpoint delete a user
+        app.delete("/api/v1/user/auth", appController::deleteUser);
     }
 }

@@ -150,4 +150,10 @@ public class AppControllers {
         this.validResponse.withDataUser(context, user);
         LOGGER.log(Level.INFO, "The user: " + user + " logging in the app");
     }
+
+    public void deleteUser(Context context) {
+        // TODO: 8/10/21 check request contains cookie
+        // TODO: 8/10/21 validate cookie
+        // TODO: 8/10/21 delete user from database
+    }
 }
