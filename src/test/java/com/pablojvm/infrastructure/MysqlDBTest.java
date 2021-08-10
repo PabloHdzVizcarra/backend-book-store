@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Disabled
+@DisplayName("Test from implementation to MySQL database")
 class MysqlDBTest {
     MysqlDB mysql;
 
@@ -63,7 +64,6 @@ class MysqlDBTest {
     @DisplayName("should delete a user when email is valid")
     void deleteUser() {
         boolean isDeleted = mysql.deleteUser("some@data.com");
-
         assertTrue(isDeleted);
     }
 }

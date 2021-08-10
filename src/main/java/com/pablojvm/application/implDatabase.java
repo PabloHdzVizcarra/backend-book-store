@@ -20,5 +20,11 @@ public interface implDatabase {
      */
     User getUser(String email);
 
+    /**
+     * Delete a user from the database by his email address
+     *
+     * @param email An email from a user registered in the database
+     * @return true if the user was deleted correctly, otherwise false
+     */
     boolean deleteUser(String email);
 }

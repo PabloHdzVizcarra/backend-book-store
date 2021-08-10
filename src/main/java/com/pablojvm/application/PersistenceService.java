@@ -15,5 +15,5 @@ public interface PersistenceService {
 
     User getUser(String email);
 
-    void deleteUser(LoginData loginData);
+    boolean deleteUser(LoginData loginData);
 }

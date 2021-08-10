@@ -35,7 +35,7 @@ public class UserPersistenceService implements PersistenceService {
     }
 
     @Override
-    public void deleteUser(LoginData loginData) {
-        this.mysql.deleteUser(loginData.getEmail());
+    public boolean deleteUser(LoginData loginData) {
+        return this.mysql.deleteUser(loginData.getEmail());
     }
 }

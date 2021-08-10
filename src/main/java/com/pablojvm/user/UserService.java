@@ -18,7 +18,7 @@ public class UserService {
         return this.persistenceService.getUser(email);
     }
 
-    public void deleteUser(LoginData loginData) {
-        this.persistenceService.deleteUser(loginData);
+    public boolean deleteUser(LoginData loginData) {
+        return this.persistenceService.deleteUser(loginData);
     }
 }

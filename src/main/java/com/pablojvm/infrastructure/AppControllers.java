@@ -157,7 +157,6 @@ public class AppControllers {
      * @param context a {@link Context} object
      */
     public void deleteUser(Context context) {
-        // TODO: 8/10/21 delete user from database
         // TODO: 8/10/21 get user from database
         // TODO: 8/10/21 check passwords equals
 
@@ -170,20 +169,33 @@ public class AppControllers {
             return;
         }
 
-        LoginData loginData = null;
+        LoginData dataCookie = null;
         try {
-            loginData = this.jwtService.validateCookie(cookie);
+            dataCookie = this.jwtService.validateCookie(cookie);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
 
-        if (loginData == null || loginData.getEmail() == null) {
+        if (dataCookie == null || dataCookie.getEmail() == null) {
             this.errorResponse.withMessage(context, "An error occurred while validating" +
                     " the user");
             return;
         }
 
-        this.userService.deleteUser(loginData);
+        User user = this.userService.getUser(dataCookie.getEmail());
+        if (user == null) {
+            String message = "The user with the email: " + dataCookie.getEmail() +
+                    " is not exists in the database";
+            this.errorResponse.withMessage(context, message);
+            LOGGER.log(Level.INFO, message);
+            return;
+        }
 
+        if (user.comparePassword(dataCookie.getPassword())) {
+            this.validResponse.withCookie(context, dataCookie);
+            return;
+        }
+
+        boolean isDeleted = this.userService.deleteUser(dataCookie);
     }
 }
