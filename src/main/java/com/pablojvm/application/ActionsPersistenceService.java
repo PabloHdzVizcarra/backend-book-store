@@ -1,6 +1,7 @@
 package com.pablojvm.application;
 
 import com.pablojvm.domain.DataUser;
+import com.pablojvm.user.LoginData;
 import com.pablojvm.user.User;
 
 public interface ActionsPersistenceService {
@@ -13,4 +14,6 @@ public interface ActionsPersistenceService {
     User saveUser(DataUser data);
 
     User getUser(String email);
+
+    void deleteUser(LoginData loginData);
 }

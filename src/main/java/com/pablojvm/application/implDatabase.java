@@ -19,4 +19,6 @@ public interface implDatabase {
      * @return An {@link User} or null
      */
     User getUser(String email);
+
+    void deleteUser(String email);
 }

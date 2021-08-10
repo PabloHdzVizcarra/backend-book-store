@@ -91,4 +91,9 @@ public class MysqlDB implements implDatabase {
         }
         return null;
     }
+
+    @Override
+    public void deleteUser(String email) {
+
+    }
 }

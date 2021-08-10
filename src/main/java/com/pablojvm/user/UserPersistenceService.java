@@ -33,4 +33,9 @@ public class UserPersistenceService implements ActionsPersistenceService {
     public User getUser(String email) {
         return this.mysql.getUser(email);
     }
+
+    @Override
+    public void deleteUser(LoginData loginData) {
+        this.mysql.deleteUser(loginData.getEmail());
+    }
 }
