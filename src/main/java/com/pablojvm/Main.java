@@ -25,8 +25,8 @@ public class Main {
         Javalin app = Javalin.create().start(8082);
         app.post("/api/v1/user/", appController::createUser);
         app.post("/api/v1/user/login", appController::loginUser);
-        app.get("/api/v1/user/auth", appController::autoLogin);
+        app.get("/api/v1/user", appController::autoLogin);
         // TODO: 8/10/21 create new endpoint delete a user
-        app.delete("/api/v1/user/auth", appController::deleteUser);
+        app.delete("/api/v1/user", appController::deleteUser);
     }
 }
