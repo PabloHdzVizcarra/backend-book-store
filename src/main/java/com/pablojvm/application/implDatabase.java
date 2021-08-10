@@ -20,5 +20,5 @@ public interface implDatabase {
      */
     User getUser(String email);
 
-    void deleteUser(String email);
+    boolean deleteUser(String email);
 }

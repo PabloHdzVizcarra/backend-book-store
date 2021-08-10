@@ -4,7 +4,7 @@ import com.pablojvm.domain.DataUser;
 import com.pablojvm.user.LoginData;
 import com.pablojvm.user.User;
 
-public interface ActionsPersistenceService {
+public interface PersistenceService {
     /**
      * Handles the saving of users in the database.
      *

@@ -1,12 +1,12 @@
 package com.pablojvm.user;
 
-import com.pablojvm.application.ActionsPersistenceService;
+import com.pablojvm.application.PersistenceService;
 import com.pablojvm.domain.DataUser;
 
 public class UserService {
-    private final ActionsPersistenceService persistenceService;
+    private final PersistenceService persistenceService;
 
-    public UserService(ActionsPersistenceService persistenceService) {
+    public UserService(PersistenceService persistenceService) {
         this.persistenceService = persistenceService;
     }
 

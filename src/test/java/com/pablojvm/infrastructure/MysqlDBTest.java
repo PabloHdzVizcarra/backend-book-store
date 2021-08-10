@@ -58,4 +58,12 @@ class MysqlDBTest {
 
         assertNull(user);
     }
+
+    @Test
+    @DisplayName("should delete a user when email is valid")
+    void deleteUser() {
+        boolean isDeleted = mysql.deleteUser("null@data.com");
+
+        assertTrue(isDeleted);
+    }
 }

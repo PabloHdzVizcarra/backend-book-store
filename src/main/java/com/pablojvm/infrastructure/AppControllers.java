@@ -157,9 +157,9 @@ public class AppControllers {
      * @param context a {@link Context} object
      */
     public void deleteUser(Context context) {
+        // TODO: 8/10/21 delete user from database
         // TODO: 8/10/21 get user from database
         // TODO: 8/10/21 check passwords equals
-        // TODO: 8/10/21 delete user from database
 
         String cookie = context.cookie("login");
         if (cookie == null) {
