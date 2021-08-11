@@ -1,24 +1,30 @@
 package com.pablojvm.user;
 
-import com.pablojvm.application.PersistenceService;
 import com.pablojvm.domain.DataUser;
 
-public class UserService {
-    private final PersistenceService persistenceService;
+public interface UserService {
 
-    public UserService(PersistenceService persistenceService) {
-        this.persistenceService = persistenceService;
-    }
+    /**
+     * Save a user in the database
+     *
+     * @param data An {@link DataUser} object with user data
+     * @return A {@link User} object what represents a user from the database
+     */
+    User saveUser(DataUser data);
 
-    public User saveUser(DataUser data) {
-        return this.persistenceService.saveUser(data);
-    }
+    /**
+     * Obtains a user from the assigned service.
+     *
+     * @param email of the user you are looking for
+     * @return a {@link User} object represented from the database
+     */
+    User getUser(String email);
 
-    public User getUser(String email) {
-        return this.persistenceService.getUser(email);
-    }
-
-    public boolean deleteUser(LoginData loginData) {
-        return this.persistenceService.deleteUser(loginData);
-    }
+    /**
+     * Deletes a user from the assigned storage service
+     *
+     * @param loginData represents a user credentials
+     * @return true if the user is deleted, otherwise false
+     */
+    boolean deleteUser(LoginData loginData);
 }
