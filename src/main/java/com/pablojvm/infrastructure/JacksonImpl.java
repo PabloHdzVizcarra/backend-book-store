@@ -3,6 +3,7 @@ package com.pablojvm.infrastructure;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pablojvm.domain.DataUser;
 import com.pablojvm.user.LoginData;
 
 public class JacksonImpl implements Mapper{
@@ -14,6 +15,16 @@ public class JacksonImpl implements Mapper{
 
     @Override
     public LoginData createLoginData(String body)  {
+        try {
+            return objectMapper.readValue(body, new TypeReference<>() {
+            });
+        } catch (JsonProcessingException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
+    @Override
+    public DataUser createDataUser(String body) throws IllegalArgumentException {
         try {
             return objectMapper.readValue(body, new TypeReference<>() {
             });
