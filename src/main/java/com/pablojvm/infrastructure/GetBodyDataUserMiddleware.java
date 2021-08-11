@@ -20,8 +20,10 @@ public class GetBodyDataUserMiddleware extends Middleware {
         DataUser dataUser = mapper.createDataUser(httpContext.body());
 
         if (dataUser == null) {
-            logger.log(Level.INFO,
-                    "Request data could not be read");
+            logger.log(
+                    Level.INFO,
+                    "Request data could not be read"
+            );
             httpContext.status(400);
             httpContext.result("request data could not be read");
             return false;
