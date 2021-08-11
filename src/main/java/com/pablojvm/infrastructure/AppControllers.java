@@ -9,6 +9,7 @@ import com.pablojvm.user.LoginData;
 import com.pablojvm.user.User;
 import com.pablojvm.user.UserPersistenceService;
 import com.pablojvm.user.UserService;
+import com.pablojvm.user.UserServiceImpl;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -27,7 +28,7 @@ public class AppControllers {
     private final JwtService jwtService;
 
     public AppControllers(
-            UserService userService,
+            UserServiceImpl userService,
             ValidationData validationService,
             Mapper mapper
     ) {
