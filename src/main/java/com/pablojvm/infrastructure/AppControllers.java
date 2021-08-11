@@ -1,14 +1,11 @@
 package com.pablojvm.infrastructure;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pablojvm.application.ValidationData;
-import com.pablojvm.domain.DataUser;
 import com.pablojvm.user.LoginData;
 import com.pablojvm.user.User;
 import com.pablojvm.user.UserPersistenceService;
 import com.pablojvm.user.UserService;
+import com.pablojvm.user.UserServiceImpl;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -22,12 +19,12 @@ public class AppControllers {
     private final ResponseOk validResponse;
     private final ValidationData validationService;
     private final Mapper mapper;
-    private static final Logger LOGGER =
+    private final Logger loggerService =
             Logger.getLogger(UserPersistenceService.class.getName());
     private final JwtService jwtService;
 
     public AppControllers(
-            UserService userService,
+            UserServiceImpl userService,
             ValidationData validationService,
             Mapper mapper
     ) {
@@ -43,42 +40,26 @@ public class AppControllers {
      * Handle logic to create one user in the app
      *
      * @param context An object {@link Context}
-     * @throws JsonProcessingException some error
      */
-    public void createUser(Context context) throws JsonProcessingException {
-        String body = context.body();
-        ObjectMapper objectMapper = new ObjectMapper();
-        DataUser data =
-                objectMapper.readValue(body, new TypeReference<>() {
-                });
+    public void createUser(Context context) {
+        RequestData requestData = new RequestData(
+                context,
+                mapper,
+                validationService,
+                loggerService,
+                userService,
+                jwtService,
+                null
+        );
 
-        List<String> errorsList =
-                validationService.createUser(data);
+        BodyDataMiddleware middleware = new BodyDataMiddleware();
+        CheckDataMiddleware checkDataMiddleware = new CheckDataMiddleware();
+        SaveUserMiddleware saveUserInDatabase = new SaveUserMiddleware();
+        middleware
+                .linkWith(checkDataMiddleware)
+                .linkWith(saveUserInDatabase);
 
-        User saveUser = userService.saveUser(data);
-
-        if (errorsList.size() != 0) {
-            this.errorResponse.createUser(context, errorsList);
-            LOGGER.log(
-                    Level.INFO,
-                    "an attempt was made to create a user with the following" +
-                            "invalid data: " + errorsList
-            );
-        } else if (saveUser == null) {
-            LOGGER.log(
-                    Level.INFO,
-                    "failed to save the user in the database"
-            );
-            this.errorResponse.withInvalidEmail(context);
-        } else {
-            LOGGER.log(
-                    Level.INFO,
-                    "the following user was successfully saved in the database" +
-                            saveUser
-            );
-            context.status(201);
-            context.json(saveUser);
-        }
+        middleware.check(requestData);
     }
 
 
@@ -94,7 +75,7 @@ public class AppControllers {
 
         if (!errors.isEmpty()) {
             this.errorResponse.withInvalidLoginData(context, errors);
-            LOGGER.log(
+            loggerService.log(
                     Level.INFO,
                     "an attempt was made to create a user with the following" +
                             "invalid data: " + errors
@@ -107,7 +88,7 @@ public class AppControllers {
             String message = "The user with the email: " + dataRequest.getEmail() +
                     " is not exists in the database";
             this.errorResponse.withMessage(context, message);
-            LOGGER.log(Level.INFO, message);
+            loggerService.log(Level.INFO, message);
             return;
         }
 
@@ -125,7 +106,7 @@ public class AppControllers {
         String cookie = context.cookie("login");
 
         if (cookie == null) {
-            LOGGER.log(Level.INFO, "try logging into server with missing cookie");
+            loggerService.log(Level.INFO, "try logging into server with missing cookie");
             this.errorResponse.withMessage(
                     context, "Missing cookie in the request, please check your request " +
                             "to server");
@@ -136,8 +117,11 @@ public class AppControllers {
         try {
             data = this.jwtService.validateCookie(cookie);
         } catch (IllegalArgumentException e) {
-            LOGGER.log(Level.WARNING, "An error occurred while validating the user" +
-                    e.getMessage());
+            loggerService.log(
+                    Level.WARNING,
+                    "An error occurred while validating the user" +
+                            e.getMessage()
+            );
         }
 
         if (data == null) {
@@ -148,7 +132,7 @@ public class AppControllers {
 
         User user = this.userService.getUser(data.getEmail());
         this.validResponse.withDataUser(context, user);
-        LOGGER.log(Level.INFO, "The user: " + user + " logging in the app");
+        loggerService.log(Level.INFO, "The user: " + user + " logging in the app");
     }
 
     /**
@@ -159,7 +143,7 @@ public class AppControllers {
     public void deleteUser(Context context) {
         String cookie = context.cookie("login");
         if (cookie == null) {
-            LOGGER.log(Level.INFO, "try logging into server with missing cookie");
+            loggerService.log(Level.INFO, "try logging into server with missing cookie");
             this.errorResponse.withMessage(
                     context, "Missing cookie in the request, please check your request " +
                             "to server");
@@ -184,7 +168,7 @@ public class AppControllers {
             String message = "The user with the email: " + dataCookie.getEmail() +
                     " is not exists in the database";
             this.errorResponse.withMessage(context, message);
-            LOGGER.log(Level.INFO, message);
+            loggerService.log(Level.INFO, message);
             return;
         }
 
