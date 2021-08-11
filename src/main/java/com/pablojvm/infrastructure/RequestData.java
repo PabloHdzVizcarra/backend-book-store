@@ -9,10 +9,10 @@ import java.util.logging.Logger;
 import io.javalin.http.Context;
 
 public class RequestData {
-    private final Context httpContext;
+    private Context httpContext;
     private final Mapper mapper;
     private final ValidationData validationService;
-    private final Logger logger;
+    private final Logger loggerService;
     private final UserService userService;
     private final JwtService jwtService;
     private DataUser dataUser;
@@ -29,7 +29,7 @@ public class RequestData {
         this.httpContext = httpContext;
         this.mapper = mapper;
         this.validationService = validationService;
-        this.logger = logger;
+        this.loggerService = logger;
         this.userService = userService;
         this.jwtService = jwtService;
         this.dataUser = dataUser;
@@ -51,12 +51,16 @@ public class RequestData {
         return mapper;
     }
 
+    public void setHttpContext(Context httpContext) {
+        this.httpContext = httpContext;
+    }
+
     public ValidationData getValidationService() {
         return validationService;
     }
 
-    public Logger getLogger() {
-        return logger;
+    public Logger getLoggerService() {
+        return loggerService;
     }
 
     public UserService getUserService() {
@@ -66,4 +70,6 @@ public class RequestData {
     public JwtService getJwtService() {
         return jwtService;
     }
+
+
 }
