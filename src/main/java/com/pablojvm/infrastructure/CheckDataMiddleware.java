@@ -16,8 +16,9 @@ public class CheckDataMiddleware extends Middleware {
     public boolean check(RequestData requestData) {
         Context httpContext = requestData.getHttpContext();
         Logger loggerService = requestData.getLoggerService();
-        ValidationData validationService = requestData.getValidationService();
         DataUser data = requestData.getDataUser();
+        ValidationData validationService = requestData.getValidationService();
+
         List<String> errorsList = validationService.createUser(data);
 
         if (errorsList.size() != 0) {

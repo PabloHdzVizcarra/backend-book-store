@@ -17,12 +17,14 @@ public class Main {
         LoggingUtil.initLogManager();
 
         AppControllers appController = new AppControllers(
-                new UserServiceImpl(new UserPersistenceService(new MysqlDB())),
+                new UserServiceImpl(
+                        new UserPersistenceService(new MysqlDB())),
                 new ValidationService(),
                 new JacksonImpl()
         );
 
         Javalin app = Javalin.create().start(8082);
+
         app.post("/api/v1/user", appController::createUser);
         app.post("/api/v1/user/login", appController::loginUser);
         app.get("/api/v1/user", appController::autoLogin);
