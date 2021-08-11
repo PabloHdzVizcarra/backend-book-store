@@ -2,6 +2,9 @@ package com.pablojvm.user;
 
 import com.pablojvm.domain.DataUser;
 
+/**
+ * Service for user persistence in the app
+ */
 public interface UserService {
 
     /**

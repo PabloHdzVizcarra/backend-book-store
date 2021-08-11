@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 import io.javalin.http.Context;
 
 public class CheckDataMiddleware extends Middleware {
+
+
     @Override
     public boolean check(RequestData requestData) {
         Context httpContext = requestData.getHttpContext();

@@ -1,6 +1,5 @@
 package com.pablojvm.infrastructure;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pablojvm.application.ValidationData;
 import com.pablojvm.user.LoginData;
 import com.pablojvm.user.User;
@@ -53,7 +52,7 @@ public class AppControllers {
                 null
         );
 
-        GetBodyDataUserMiddleware middleware = new GetBodyDataUserMiddleware();
+        BodyDataMiddleware middleware = new BodyDataMiddleware();
         CheckDataMiddleware checkDataMiddleware = new CheckDataMiddleware();
         SaveUserMiddleware saveUserInDatabase = new SaveUserMiddleware();
         middleware

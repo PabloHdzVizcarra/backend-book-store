@@ -7,9 +7,9 @@ import java.util.logging.Logger;
 
 import io.javalin.http.Context;
 
-public class GetBodyDataUserMiddleware extends Middleware {
+public class BodyDataMiddleware extends Middleware {
 
-    public GetBodyDataUserMiddleware() {
+    public BodyDataMiddleware() {
     }
 
     @Override
