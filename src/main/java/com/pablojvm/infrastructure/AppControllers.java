@@ -48,8 +48,7 @@ public class AppControllers {
                 validationService,
                 loggerService,
                 userService,
-                jwtService,
-                null
+                jwtService
         );
 
         BodyDataMiddleware middleware = new BodyDataMiddleware();

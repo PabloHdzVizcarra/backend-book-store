@@ -23,8 +23,7 @@ public class RequestData {
             ValidationData validationService,
             Logger logger,
             UserService userService,
-            JwtService jwtService,
-            DataUser dataUser
+            JwtService jwtService
     ) {
         this.httpContext = httpContext;
         this.mapper = mapper;
@@ -32,7 +31,6 @@ public class RequestData {
         this.loggerService = logger;
         this.userService = userService;
         this.jwtService = jwtService;
-        this.dataUser = dataUser;
     }
 
     public DataUser getDataUser() {

@@ -34,8 +34,7 @@ public class UserComponentImpl implements UserComponent {
                 validationService,
                 loggerService,
                 null,
-                jwtService,
-                null
+                jwtService
         );
     }
 }
